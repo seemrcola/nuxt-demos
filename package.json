@@ -1,0 +1,25 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "peerdependencies": {
+    "eslint": "8.38.0"
+  },
+  "dependencies": {
+    "@antfu/eslint-config": "^0.38.6",
+    "@iconify/json": "^2.2.62",
+    "sass": "^1.62.1"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "^0.4.5",
+    "@types/node": "^18",
+    "@unocss/nuxt": "^0.51.12",
+    "nuxt": "^3.4.3"
+  }
+}
