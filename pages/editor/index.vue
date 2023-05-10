@@ -3,7 +3,7 @@ import Aside from './components/Aside.vue'
 import Header from './components/Header.vue'
 import CompsList from './components/CompsList.vue'
 import Settings from './components/Settings.vue'
-import CanvasContainer from './components/CanvasContainer.vue'
+import CanvasContainer from './components/Container.vue'
 </script>
 
 <template>

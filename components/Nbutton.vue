@@ -1,8 +1,11 @@
 <script setup lang='ts'>
-
+const props = defineProps<{
+  text: string
+}>()
 </script>
 
 <template>
-  <div>hello world</div>
+  <div btn>
+    {{ $props.text }}
+  </div>
 </template>
-

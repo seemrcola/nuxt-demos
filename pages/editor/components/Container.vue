@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-useKeyboard()
+useKeyboard() // Fn功能键监听
 
 const scale = ref(0.7)
 const style = computed(() => ({
@@ -7,13 +7,15 @@ const style = computed(() => ({
   transformOrigin: 'top left',
 }))
 
-// 实现一个鼠标滚动缩放的功能
+// 滚轮缩放
 function handleMouseWheel(e: WheelEvent) {
+  if (!window.$KeyboardActive.space)
+    return
   if (e.deltaY > 0)
     scale.value -= 0.05
   else
     scale.value += 0.05
-  // 设置缩放上限
+  // 设置上下限
   scale.value = Math.max(0.5, scale.value)
   scale.value = Math.min(3, scale.value)
 }
@@ -28,7 +30,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div h-full w-full relative overflow-hidden>
+  <div h-full w-full relative overflow-hidden text-2xl>
     <div
       ref="canvasTarget"
       w="1920px" h="1080px" bg="gray-100"

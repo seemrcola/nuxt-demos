@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>
-    <textarea cols="10" rows="3" />
+  <div w="300px" h="200px">
+    <textarea wh-full />
   </div>
 </template>
