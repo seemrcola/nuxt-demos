@@ -3,11 +3,14 @@ import NGoast from './NGoast.vue'
 import { BasicDescribes } from '~/components/Basic/index.describe'
 import { ShapeDescribes } from '~/components/Shape/index.describe'
 
+const basicComponents = BasicDescribes
+const basicShapes = ShapeDescribes
+
 let dragFlag = false
 let mousedownSnapshotName = ''
 let currentDescribe: any = ''
 const currentComponent = ref('')
-const style = ref({ left: '0', top: '0' })
+const style = ref({ left: '0', top: '0', cursor: 'grab' })
 function mousedownHandler(e: MouseEvent, name: string) {
   e.preventDefault()
   dragFlag = true
@@ -24,6 +27,7 @@ function mousemoveHandler(e: MouseEvent) {
     currentDescribe = findDiscribe(mousedownSnapshotName)
   requestAnimationFrame(() => {
     style.value = {
+      ...style.value,
       left: `${clientX - currentDescribe!.w / 2}px`,
       top: `${clientY - currentDescribe!.h / 2}px`,
     }
@@ -63,7 +67,7 @@ onUnmounted(() => {
       </div>
       <div flex flex-wrap justify-around p-2>
         <div
-          v-for="item of BasicDescribes" :key="item.name"
+          v-for="item of basicComponents" :key="item.name"
           flex-center class="comp-item"
           @mousedown="mousedownHandler($event, item.name)"
         >
@@ -77,7 +81,7 @@ onUnmounted(() => {
       </div>
       <div flex flex-wrap justify-around p-2>
         <div
-          v-for="item of ShapeDescribes" :key="item.name"
+          v-for="item of basicShapes" :key="item.name"
           flex-center class="comp-item"
           @mousedown="mousedownHandler($event, item.name)"
         >

@@ -1,24 +1,33 @@
 <script setup lang='ts'>
-// 使用canvas画一个圆:
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const canvasWidth = 100
 const canvasHeight = 100
 
 const state = reactive({
-  circleRadius: 50,
-  circleColor: 'orange',
+  color: 'orange',
 })
 
 function draw(ctx: CanvasRenderingContext2D) {
+  // 定义三角形顶点的坐标
+  const x1 = 50
+  const y1 = 0
+  const x2 = 100
+  const y2 = 100
+  const x3 = 0
+  const y3 = 100
+
+  // 开始路径
   ctx.beginPath()
-  ctx.arc(
-    canvasWidth / 2,
-    canvasHeight / 2,
-    state.circleRadius,
-    0,
-    2 * Math.PI,
-  )
-  ctx.fillStyle = state.circleColor
+  // 移动到第一个顶点
+  ctx.moveTo(x1, y1)
+  // 连接第二个顶点
+  ctx.lineTo(x2, y2)
+  // 连接第三个顶点
+  ctx.lineTo(x3, y3)
+  // 闭合路径
+  ctx.closePath()
+  // 设置填充颜色并填充三角形
+  ctx.fillStyle = state.color
   ctx.fill()
 }
 

@@ -1,25 +1,16 @@
 <script setup lang='ts'>
-// 使用canvas画一个圆:
+// 使用canvas画一个矩形:
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const canvasWidth = 100
 const canvasHeight = 100
 
 const state = reactive({
-  circleRadius: 50,
-  circleColor: 'orange',
+  color: 'orange',
 })
 
 function draw(ctx: CanvasRenderingContext2D) {
-  ctx.beginPath()
-  ctx.arc(
-    canvasWidth / 2,
-    canvasHeight / 2,
-    state.circleRadius,
-    0,
-    2 * Math.PI,
-  )
-  ctx.fillStyle = state.circleColor
-  ctx.fill()
+  ctx.fillStyle = state.color
+  ctx.fillRect(0, 0, canvasWidth, canvasHeight)
 }
 
 onMounted(() => {
