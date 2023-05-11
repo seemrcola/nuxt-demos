@@ -1,24 +1,10 @@
 <script setup lang='ts'>
+import NGoast from './NGoast.vue'
+import { useCanvasRender } from '~/store/canvasRender'
+
+const canvasRender = useCanvasRender()
+const { handleMouseWheel } = canvasRender
 useKeyboard() // Fn功能键监听
-
-const scale = ref(0.7)
-const style = computed(() => ({
-  transform: `scale(${scale.value})`,
-  transformOrigin: 'top left',
-}))
-
-// 滚轮缩放
-function handleMouseWheel(e: WheelEvent) {
-  if (!window.$KeyboardActive.space)
-    return
-  if (e.deltaY > 0)
-    scale.value -= 0.05
-  else
-    scale.value += 0.05
-  // 设置上下限
-  scale.value = Math.max(0.5, scale.value)
-  scale.value = Math.min(3, scale.value)
-}
 
 const canvasTarget = ref<HTMLElement | null>(null)
 onMounted(() => {
@@ -30,14 +16,21 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div h-full w-full relative overflow-hidden text-2xl>
+  <div h-full w-full relative overflow-hidden>
     <div
-      ref="canvasTarget"
+      ref="canvasTarget" class="canvas-target"
       w="1920px" h="1080px" bg="gray-100"
       absolute z-0
-      :style="style"
+      :style="canvasRender.canvasStyle"
     >
-      hello world
+      <!-- {{ canvasRender.components }} -->
+      <NGoast
+        v-for="(component, index) of canvasRender.components"
+        :key="index"
+        :component="component.name"
+        absolute
+        :style="canvasRender.componentStyle(component)"
+      />
     </div>
   </div>
 </template>
