@@ -5,6 +5,7 @@ import { ShapeDescribes } from '~/components/Shape/index.describe'
 
 let dragFlag = false
 let mousedownSnapshotName = ''
+let currentDescribe: any = ''
 const currentComponent = ref('')
 const style = ref({ left: '0', top: '0' })
 function mousedownHandler(e: MouseEvent, name: string) {
@@ -19,7 +20,8 @@ function mousemoveHandler(e: MouseEvent) {
     return
   currentComponent.value = mousedownSnapshotName
   const { clientX, clientY } = e
-  const currentDescribe = findDiscribe(mousedownSnapshotName)
+  if (!currentDescribe)
+    currentDescribe = findDiscribe(mousedownSnapshotName)
   requestAnimationFrame(() => {
     style.value = {
       left: `${clientX - currentDescribe!.w / 2}px`,
@@ -31,6 +33,7 @@ function mouseupHandler() {
   dragFlag = false
   currentComponent.value = ''
   mousedownSnapshotName = ''
+  currentDescribe = ''
 }
 function findDiscribe(name: string) {
   return [...BasicDescribes, ...ShapeDescribes].find((describe) => {
