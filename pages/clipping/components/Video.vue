@@ -9,7 +9,7 @@ const canvasTarget = ref<HTMLCanvasElement | null>(null)
 const video = ref<HTMLVideoElement | null>(null)
 const ctx = computed(() => canvasTarget.value!.getContext('2d')!)
 
-const FRAME_RATE = 10
+const FRAME_RATE = 30
 
 function handleFileSelect(evt: any) {
   const file = evt.target.files[0]
