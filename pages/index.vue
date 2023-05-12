@@ -5,8 +5,8 @@ const $router = useRouter()
 function gotoEdit() {
   $router.push('/editor')
 }
-function gotoVideo() {
-  $router.push('/video')
+function gotoClipping() {
+  $router.push('/clipping')
 }
 </script>
 
@@ -32,9 +32,9 @@ function gotoVideo() {
       cursor-pointer
       hover="bg-orange-400 shadow-md scale-105 b-2 color-white"
       transition duration-300
-      @click="gotoVideo"
+      @click="gotoClipping"
     >
-      Go To Video Page
+      Go To Clipping Page
     </div>
   </div>
 </template>
