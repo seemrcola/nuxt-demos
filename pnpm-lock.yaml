@@ -16,6 +16,9 @@ dependencies:
   sass:
     specifier: ^1.62.1
     version: 1.62.1
+  webrtc-adapter:
+    specifier: ^8.2.2
+    version: 8.2.2
 
 devDependencies:
   '@nuxt/devtools':
@@ -6709,6 +6712,10 @@ packages:
   /scule@1.0.0:
     resolution: {integrity: sha512-4AsO/FrViE/iDNEPaAQlb77tf0csuq27EsVpy6ett584EcRTp6pTDLoGWVxCD77y5iU5FauOvhsI4o1APwPoSQ==}
 
+  /sdp@3.2.0:
+    resolution: {integrity: sha512-d7wDPgDV3DDiqulJjKiV2865wKsJ34YI+NDREbm+FySq6WuKOikwyNQcm+doLAZ1O6ltdO0SeKle2xMpN3Brgw==}
+    dev: false
+
   /semver@5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}
     hasBin: true
@@ -7910,6 +7917,13 @@ packages:
       - esbuild
       - uglify-js
     dev: true
+
+  /webrtc-adapter@8.2.2:
+    resolution: {integrity: sha512-jQWwqiAEAFZamWliJo0Q+dIC6ZMJ8BgCFvW/oXWVFby1Nw14dOUfPwZ3lVe4nafDXdTyCUT7xfLt5xXiioXUCQ==}
+    engines: {node: '>=6.0.0', npm: '>=3.10.0'}
+    dependencies:
+      sdp: 3.2.0
+    dev: false
 
   /whatwg-url@5.0.0:
     resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}

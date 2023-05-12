@@ -16,7 +16,8 @@
     "@iconify/json": "^2.2.62",
     "@pinia/nuxt": "^0.4.10",
     "pinia": "^2.0.36",
-    "sass": "^1.62.1"
+    "sass": "^1.62.1",
+    "webrtc-adapter": "^8.2.2"
   },
   "devDependencies": {
     "@nuxt/devtools": "^0.4.5",

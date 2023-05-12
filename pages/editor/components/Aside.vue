@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { CheckoutTypes } from '~/enums/checkout.enum'
+import { CheckoutTypes } from '~/enums/editor.enum'
 
 const emits = defineEmits(['checkout'])
 function checkout(name: string) {
