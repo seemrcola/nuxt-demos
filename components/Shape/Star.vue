@@ -7,6 +7,22 @@ const state = reactive({
   color: 'orange',
 })
 
+function dpr(ctx: CanvasRenderingContext2D) {
+  // 获取设备像素比
+  const dpr = window.devicePixelRatio || 1
+
+  // 设置canvas元素的物理大小
+  canvasRef.value!.style.width = `${canvasWidth}px`
+  canvasRef.value!.style.height = `${canvasHeight}px`
+
+  // 设置canvas元素的逻辑大小
+  canvasRef.value!.width = canvasWidth * dpr
+  canvasRef.value!.height = canvasHeight * dpr
+
+  // 缩放
+  ctx.scale(dpr, dpr)
+}
+
 function draw(ctx: CanvasRenderingContext2D) {
   // 定义五角星的外接圆半径和顶点坐标
   const R = 50
@@ -50,7 +66,7 @@ onMounted(() => {
   const ctx = canvas.getContext('2d')
   if (!ctx)
     return
-
+  dpr(ctx)
   draw(ctx)
 })
 </script>

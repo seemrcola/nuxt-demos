@@ -5,6 +5,9 @@ const $router = useRouter()
 function gotoEdit() {
   $router.push('/editor')
 }
+function gotoVideo() {
+  $router.push('/video')
+}
 </script>
 
 <template>
@@ -21,6 +24,17 @@ function gotoEdit() {
       @click="gotoEdit"
     >
       Go To Edit Page
+    </div>
+    <div h-20 />
+    <div
+      b="1px solid orange" w-100 h-40 rounded-4
+      flex justify-center items-center
+      cursor-pointer
+      hover="bg-orange-400 shadow-md scale-105 b-2 color-white"
+      transition duration-300
+      @click="gotoVideo"
+    >
+      Go To Video Page
     </div>
   </div>
 </template>
