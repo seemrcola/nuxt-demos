@@ -1,10 +1,13 @@
 <script setup lang='ts'>
 import 'webrtc-adapter'
 import DeviceInfos from './components/DeviceInfos.vue'
-import { DeviceTypes } from '~/enums/webrtc.enum'
+import Options from './components/Options.vue'
+import Recorder from './components/Recorder.vue'
+import Screen from './components/Screen.vue'
+import { icons } from './config'
+import { IconTypes } from './enum'
 
 const localVideo = ref<HTMLVideoElement | null>(null)
-const deviceInfos = ref<any[]>([])
 
 function ifSupportWebRTC() {
   return navigator.mediaDevices && navigator.mediaDevices.getUserMedia
@@ -12,8 +15,8 @@ function ifSupportWebRTC() {
 
 async function init() {
   const stream = await getMediaStream()
+  window.localStream = stream // 将stream挂载到window上，方便调试
   localVideo.value!.srcObject = stream
-  deviceInfos.value = await getDevices()
 }
 
 function getMediaStream() {
@@ -24,25 +27,11 @@ function getMediaStream() {
   return navigator.mediaDevices.getUserMedia(constraints)
 }
 
-async function getDevices() {
-  const devices = await navigator.mediaDevices.enumerateDevices()
-  const result: any[] = []
-  devices.forEach((device) => {
-    let desc = ''
-    if (device.kind === DeviceTypes.AUDIO_INPUT)
-      desc = 'Audio-input'
-    if (device.kind === DeviceTypes.AUDIO_OUTPUT)
-      desc = 'Audio-output'
-    if (device.kind === DeviceTypes.VIDEO_INPUT)
-      desc = 'Video-input'
-    result.push({ deviceLabel: device.label, deviceId: device.deviceId, desc })
-  })
-  return result
-}
-
 const drawerVisible = ref(false)
-function showDrawer() {
+const types = ref<IconTypes>(IconTypes.NONE)
+function showDrawer(type: IconTypes) {
   drawerVisible.value = true
+  types.value = type
 }
 
 onMounted(() => {
@@ -60,11 +49,19 @@ onMounted(() => {
     <div flex h="[calc(100vh-40px)]">
       <div
         w="40px" h-full
-        py-2
         b-r="1px solid gray-200"
       >
-        <Ntag text="设备信息" flex justify-center cursor-pointer>
-          <div i-mdi:devices w-6 h-6 @click="showDrawer" />
+        <Ntag
+          v-for="(icon, index) of icons" :key="index"
+          :text="icon.title"
+          flex justify-center cursor-pointer
+          my-4
+        >
+          <div
+            :class="icon.icon"
+            w-6 h-6 text-dark-1 hover="text-teal-600" transition duration-500
+            @click="showDrawer(icon.type)"
+          />
         </Ntag>
       </div>
       <div flex-1 h-full>
@@ -74,7 +71,16 @@ onMounted(() => {
       </div>
     </div>
     <NDrawer :visible="drawerVisible" @update:visible="drawerVisible = $event">
-      <DeviceInfos :device-infos="deviceInfos" />
+      <DeviceInfos v-if="types === IconTypes.DEVICE" />
+      <Options v-if="types === IconTypes.OPTIONS" />
+      <Recorder v-if="types === IconTypes.RECORDER" />
+      <Screen v-if="types === IconTypes.SCREEN" />
     </NDrawer>
   </div>
 </template>
+
+<style lang="scss">
+video {
+  transform: scaleX(-1);
+}
+</style>

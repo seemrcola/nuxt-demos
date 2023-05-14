@@ -9,4 +9,5 @@ declare interface Window {
   $KeyboardActive: FnKeyboard
   $OS: 'WINDOWS'|'MAC'
   $ifwebkit: boolean
+  localStream: MediaStream // 本地视频流 
 }

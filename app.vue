@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+
 </script>
 
 <template>
@@ -11,9 +12,11 @@
 
 <style>
 html, body , #__nuxt{
+  width: 100vw;
   height: 100vh;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 html.dark {
