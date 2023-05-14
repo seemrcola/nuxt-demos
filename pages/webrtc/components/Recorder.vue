@@ -111,7 +111,7 @@ const recordCodeHtml = Prism.highlight(code, Prism.languages.javascript, 'javasc
       </div>
     </div>
 
-    <div h="300px" p-2 b="1px dashed gray">
+    <div max-h="300px" p-2 b="1px dashed gray" overflow-y-auto>
       <div v-if="isRecording" h-full flex-center flex-col>
         <div i-carbon:recording-filled text-red-4 text-5xl />
         <p>Recording</p>
@@ -120,7 +120,7 @@ const recordCodeHtml = Prism.highlight(code, Prism.languages.javascript, 'javasc
     </div>
 
     <pre
-      mt-4 px-2 max-h="450px" overflow-auto
+      mt-4 px-2 max-h="[calc(100vh-400px)]" overflow-auto
       b="1px dashed gray"
     >
       <code v-html="recordCodeHtml" />

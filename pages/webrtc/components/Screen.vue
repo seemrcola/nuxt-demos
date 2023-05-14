@@ -50,7 +50,7 @@ const codeHtml = Prism.highlight(code, Prism.languages.javascript, 'javascript')
       </div>
     </div>
 
-    <div h="300px" p-2 b="1px dashed gray">
+    <div p-2 b="1px dashed gray">
       <video ref="replayVideo" w-full />
     </div>
 
