@@ -61,8 +61,7 @@ async function stop() {
     screenTrack.stop()
     screenShareStream.value = undefined
   }
-}
-`
+}`
 const codeHtml = Prism.highlight(code, Prism.languages.javascript, 'javascript')
 </script>
 
