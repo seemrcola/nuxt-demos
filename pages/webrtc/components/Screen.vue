@@ -63,6 +63,10 @@ async function stop() {
   }
 }`
 const codeHtml = Prism.highlight(code, Prism.languages.javascript, 'javascript')
+
+onUnmounted(() => {
+  stop()
+})
 </script>
 
 <template>

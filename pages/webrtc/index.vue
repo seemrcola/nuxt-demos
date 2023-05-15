@@ -23,7 +23,9 @@ async function init() {
 
 function getMediaStream() {
   const constraints = {
-    video: true,
+    video: {
+      aspectRatio: 0.8,
+    },
     audio: false,
   }
   return navigator.mediaDevices.getUserMedia(constraints)

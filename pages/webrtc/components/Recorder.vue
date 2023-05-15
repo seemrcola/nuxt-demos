@@ -96,6 +96,10 @@ function replay() {
   buffer.value = []
 }`
 const recordCodeHtml = Prism.highlight(code, Prism.languages.javascript, 'javascript')
+
+onUnmounted(() => {
+  recorder?.stop()
+})
 </script>
 
 <template>
