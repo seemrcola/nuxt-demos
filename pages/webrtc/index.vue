@@ -6,8 +6,10 @@ import Recorder from './components/Recorder.vue'
 import Screen from './components/Screen.vue'
 import { icons } from './config'
 import { IconTypes } from './enum'
+import { useDrag } from '~/composables/useDrag'
 
 const localVideo = ref<HTMLVideoElement | null>(null)
+const { mousedownHanlder } = useDrag(localVideo)
 
 function ifSupportWebRTC() {
   return navigator.mediaDevices && navigator.mediaDevices.getUserMedia
@@ -67,6 +69,8 @@ onMounted(() => {
       <div flex-1 h-full>
         <video
           ref="localVideo" autoplay playsinline
+          absolute
+          @mousedown="mousedownHanlder"
         />
       </div>
     </div>
@@ -82,5 +86,6 @@ onMounted(() => {
 <style lang="scss">
 video {
   transform: scaleX(-1);
+  will-change: auto;
 }
 </style>
