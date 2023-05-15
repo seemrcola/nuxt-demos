@@ -50,10 +50,8 @@ const codeHtml = Prism.highlight(code, Prism.languages.javascript, 'javascript')
       <code v-html="audioCodeHtml" />
     </pre>
 
-    <div b="1px dashed gray" mt-6 px-2>
-      <pre leading-5>
-      <code v-html="codeHtml" />
-    </pre>
+    <div b="1px dashed gray" mt-6 px-2 leading-5>
+      <NCode :code-html="codeHtml" />
     </div>
   </div>
 </template>

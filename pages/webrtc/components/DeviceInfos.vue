@@ -43,10 +43,8 @@ const html = Prism.highlight(code, Prism.languages.javascript, 'javascript')
       </div>
     </div>
 
-    <div mt-8 b="1px dashed gray">
-      <pre leading-6>
-        <code v-html="html" />
-      </pre>
+    <div mt-8 b="1px dashed gray" leading-5>
+      <NCode :code-html="html" />
     </div>
   </div>
 </template>

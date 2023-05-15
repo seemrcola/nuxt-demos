@@ -52,6 +52,7 @@ function replay() {
   // 将url赋值给video标签
   replayVideo.value!.src = url
   replayVideo.value!.play()
+  // 清空buffer
   buffer.value = []
 }
 
@@ -119,11 +120,12 @@ const recordCodeHtml = Prism.highlight(code, Prism.languages.javascript, 'javasc
       <video v-else ref="replayVideo" w-full />
     </div>
 
-    <pre
-      mt-4 px-2 max-h="[calc(100vh-400px)]" overflow-auto
+    <div
+      max-h="[calc(100vh-400px)]" overflow-auto
+      mt-4
       b="1px dashed gray"
     >
-      <code v-html="recordCodeHtml" />
-    </pre>
+      <NCode :code-html="recordCodeHtml" />
+    </div>
   </div>
 </template>

@@ -54,11 +54,8 @@ const codeHtml = Prism.highlight(code, Prism.languages.javascript, 'javascript')
       <video ref="replayVideo" w-full />
     </div>
 
-    <pre
-      mt-4 px-2 max-h="450px" overflow-auto
-      b="1px dashed gray"
-    >
-      <code v-html="codeHtml" />
-    </pre>
+    <div b="1px dashed gray" overflow-auto mt-4>
+      <NCode :code-html="codeHtml" />
+    </div>
   </div>
 </template>
