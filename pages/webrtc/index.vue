@@ -6,32 +6,10 @@ import Recorder from './components/Recorder.vue'
 import Screen from './components/Screen.vue'
 import NAT from './components/Nat.vue'
 import PeerConect from './components/PeerConect.vue'
+
+import Base from './base.vue'
 import { icons } from './config'
 import { IconTypes } from './enum'
-import { useDrag } from '~/composables/useDrag'
-
-const localVideo = ref<HTMLVideoElement | null>(null)
-const { mousedownHanlder } = useDrag(localVideo)
-
-function ifSupportWebRTC() {
-  return navigator.mediaDevices && navigator.mediaDevices.getUserMedia
-}
-
-async function init() {
-  const stream = await getMediaStream()
-  window.localStream = stream // 将stream挂载到window上，方便调试
-  localVideo.value!.srcObject = stream
-}
-
-function getMediaStream() {
-  const constraints = {
-    video: {
-      aspectRatio: 0.8,
-    },
-    audio: false,
-  }
-  return navigator.mediaDevices.getUserMedia(constraints)
-}
 
 const drawerVisible = ref(false)
 const types = ref<IconTypes>(IconTypes.NONE)
@@ -40,10 +18,13 @@ function showDrawer(type: IconTypes) {
   types.value = type
 }
 
+function ifSupportWebRTC() {
+  return navigator.mediaDevices && navigator.mediaDevices.getUserMedia
+}
+
 onMounted(() => {
   if (!ifSupportWebRTC())
     return alert('浏览器不支持WebRTC')
-  init()
 })
 </script>
 
@@ -71,11 +52,7 @@ onMounted(() => {
         </Ntag>
       </div>
       <div flex-1 h-full>
-        <video
-          ref="localVideo" autoplay playsinline
-          absolute h-5 w-5
-          @mousedown="mousedownHanlder"
-        />
+        <Base />
       </div>
     </div>
     <NDrawer :visible="drawerVisible" @update:visible="drawerVisible = $event">
