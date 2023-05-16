@@ -4,6 +4,8 @@ import DeviceInfos from './components/DeviceInfos.vue'
 import Options from './components/Options.vue'
 import Recorder from './components/Recorder.vue'
 import Screen from './components/Screen.vue'
+import NAT from './components/Nat.vue'
+import PeerConect from './components/PeerConect.vue'
 import { icons } from './config'
 import { IconTypes } from './enum'
 import { useDrag } from '~/composables/useDrag'
@@ -71,7 +73,7 @@ onMounted(() => {
       <div flex-1 h-full>
         <video
           ref="localVideo" autoplay playsinline
-          absolute
+          absolute h-5 w-5
           @mousedown="mousedownHanlder"
         />
       </div>
@@ -81,6 +83,8 @@ onMounted(() => {
       <Options v-if="types === IconTypes.OPTIONS" />
       <Recorder v-if="types === IconTypes.RECORDER" />
       <Screen v-if="types === IconTypes.SCREEN" />
+      <NAT v-if="types === IconTypes.NAT" />
+      <PeerConect v-if="types === IconTypes.PEERCONECT" />
     </NDrawer>
   </div>
 </template>
