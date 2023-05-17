@@ -13,8 +13,8 @@ const localStream = ref<MediaStream | null>(null)
 let pc1: RTCPeerConnection
 let pc2: RTCPeerConnection
 
-let offerJSON: RTCSessionDescriptionInit
-let answerJSON: RTCSessionDescriptionInit
+const offerJSON: any = ref({ sdp: '', type: '' })
+const answerJSON: any = ref({ sdp: '', type: '' })
 
 async function init() {
   const stream = await getMediaStream()
@@ -39,11 +39,14 @@ function getRemoteStream(streams: readonly MediaStream[]) {
 async function getLocalDescription(desc: RTCSessionDescriptionInit) {
   // 将本地描述信息设置到pc1中
   pc1.setLocalDescription(desc)
+  // 通过信令服务器发送给对端
+  // !! no code 本地操作，没有信令服务器，所以直接将本地的描述信息设置到pc2中
   // 将本地描述信息设置到pc2中
   pc2.setRemoteDescription(desc)
   // 生成对端的描述信息
   const answer = await pc2.createAnswer()
-  answerJSON = answer
+  answerJSON.value = answer
+  // 通过信令服务器发送给对端
   getAnswer(answer)
 }
 
@@ -81,7 +84,7 @@ async function call() {
   }
   // 创建offer
   const offer = await pc1.createOffer(offerOptions)
-  offerJSON = offer
+  offerJSON.value = offer
   // 生成本地的描述信息
   getLocalDescription(offer)
   // ================================================
@@ -103,20 +106,36 @@ onMounted(() => {
         call
       </div>
     </div>
-    <div flex-1 p-4>
+    <div flex-1 p-4 flex>
       <video
         ref="localVideo" autoplay playsinline
         h-full w-auto
       />
+      <div flex-1>
+        <div m-4 p-1 b="1px dashed gray">
+          offer
+        </div>
+        <textarea block mx-4 h="300px" w="[calc(100%-2rem)]" readonly :value="offerJSON.sdp" />
+        <div m-4 p-1 b="1px dashed gray">
+          answer
+        </div>
+        <textarea block mx-4 h="300px" w="[calc(100%-2rem)]" readonly :value="answerJSON.sdp" />
+      </div>
       <Teleport to="body">
         <video
           ref="remoteVideo" autoplay playsinline
           absolute right="100px" top="100px"
           h="300px" w="300px"
-          bg="black"
+          bg="white" b="1px solid gray" shadow="md"
           @mousedown="mousedownHanlder"
         />
       </Teleport>
     </div>
   </div>
 </template>
+
+<style scoped>
+textarea {
+  resize: none;
+}
+</style>
