@@ -1,7 +1,4 @@
 <script setup lang='ts'>
-import Prism from 'prismjs'
-import 'prismjs/themes/prism.css'
-
 const videoOptionsCode = `
 videoOptions: {
   height: <number>,                   // 视频高度
@@ -35,23 +32,15 @@ const videoTrack = stream.getVideoTracks()[0]
 const audioTrack = stream.getAudioTracks()[0]
 const videoConstraints = videoTrack.getSettings()
 const audioConstraints = audioTrack.getSettings()`
-
-const videoCodeHtml = Prism.highlight(videoOptionsCode, Prism.languages.javascript, 'javascript')
-const audioCodeHtml = Prism.highlight(audioOptionsCode, Prism.languages.javascript, 'javascript')
-const codeHtml = Prism.highlight(code, Prism.languages.javascript, 'javascript')
 </script>
 
 <template>
   <div p-4 overflow-y-auto>
-    <pre leading-5>
-      <code v-html="videoCodeHtml" />
-    </pre>
-    <pre leading-5>
-      <code v-html="audioCodeHtml" />
-    </pre>
+    <NCode leading-5 :code-html="videoOptionsCode" />
+    <NCode leading-5 :code-html="audioOptionsCode" />
 
     <div b="1px dashed gray" mt-6 px-2 leading-5>
-      <NCode :code-html="codeHtml" />
+      <NCode :code-html="code" />
     </div>
   </div>
 </template>

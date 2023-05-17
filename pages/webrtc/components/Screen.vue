@@ -1,7 +1,4 @@
 <script setup lang='ts'>
-import Prism from 'prismjs'
-import 'prismjs/themes/prism.css'
-
 const replayVideo = ref<HTMLVideoElement | null>(null)
 const screenShareStream = ref<MediaStream>()
 
@@ -62,7 +59,6 @@ async function stop() {
     screenShareStream.value = undefined
   }
 }`
-const codeHtml = Prism.highlight(code, Prism.languages.javascript, 'javascript')
 
 onUnmounted(() => {
   stop()
@@ -89,7 +85,7 @@ onUnmounted(() => {
       max-h="[calc(100vh-400px)]"
       overflow-auto mt-4
     >
-      <NCode :code-html="codeHtml" />
+      <NCode :code-html="code" />
     </div>
   </div>
 </template>

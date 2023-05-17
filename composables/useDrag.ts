@@ -1,3 +1,6 @@
+/*
+* 注意：将需要drag的元素telleport到body下
+*/
 export function useDrag(domRef: Ref<any>) {
   let dragFlag = false
   let skewing: { x: number; y: number }

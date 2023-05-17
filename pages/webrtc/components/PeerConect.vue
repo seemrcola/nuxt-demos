@@ -1,7 +1,4 @@
 <script setup lang='ts'>
-import Prism from 'prismjs'
-import 'prismjs/themes/prism.css'
-
 const media = `
 // 创建一个offer，offer就是sdp的一种描述格式
 // sdp包含了媒体协商的信息，包括媒体类型、编解码器、带宽、分辨率等
@@ -22,7 +19,6 @@ sendAnswer()
 setRemoteDescription() [from B]
 // 本地和对方都收到了对方的媒体协商信息，开始进行候选者信息的交换
 addIceCandidate()`
-const mediaHtml = Prism.highlight(media, Prism.languages.javascript, 'javascript')
 </script>
 
 <template>
@@ -39,7 +35,7 @@ const mediaHtml = Prism.highlight(media, Prism.languages.javascript, 'javascript
         b-b="1px solid gray"
       >
       <div px-2 b="1px dashed gray">
-        <NCode :code-html="mediaHtml" />
+        <NCode :code-html="media" />
       </div>
     </div>
 

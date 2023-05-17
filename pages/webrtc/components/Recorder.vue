@@ -1,7 +1,4 @@
 <script setup lang='ts'>
-import Prism from 'prismjs'
-import 'prismjs/themes/prism.css'
-
 let recorder: MediaRecorder
 const buffer = ref<Blob[]>([])
 const replayVideo = ref<HTMLVideoElement | null>(null)
@@ -95,7 +92,6 @@ function replay() {
   replayVideo.value!.play()
   buffer.value = []
 }`
-const recordCodeHtml = Prism.highlight(code, Prism.languages.javascript, 'javascript')
 
 onUnmounted(() => {
   recorder?.stop()
@@ -129,7 +125,7 @@ onUnmounted(() => {
       mt-4
       b="1px dashed gray"
     >
-      <NCode :code-html="recordCodeHtml" />
+      <NCode :code-html="code" />
     </div>
   </div>
 </template>

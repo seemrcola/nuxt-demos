@@ -1,7 +1,4 @@
 <script setup lang='ts'>
-import Prism from 'prismjs'
-import 'prismjs/themes/prism.css'
-
 import { DeviceTypes } from '~/enums/webrtc.enum'
 
 const deviceInfos = ref<any[]>([])
@@ -29,7 +26,6 @@ onMounted(async () => {
 const code = `                             
  const devices =                          
       await navigator.mediaDevices.enumerateDevices()`
-const html = Prism.highlight(code, Prism.languages.javascript, 'javascript')
 </script>
 
 <template>
@@ -44,7 +40,7 @@ const html = Prism.highlight(code, Prism.languages.javascript, 'javascript')
     </div>
 
     <div mt-8 b="1px dashed gray" leading-5>
-      <NCode :code-html="html" />
+      <NCode :code-html="code" />
     </div>
   </div>
 </template>
