@@ -1,12 +1,12 @@
 <script setup lang='ts'>
-import { useDrag } from '~/composables/useDrag'
-
 const localVideo = ref<HTMLVideoElement | null>(null)
-const { mousedownHanlder } = useDrag(localVideo)
+const remoteVideo = ref<HTMLVideoElement | null>(null)
+
+const localStream = ref<MediaStream | null>(null)
 
 async function init() {
   const stream = await getMediaStream()
-  window.localStream = stream // 将stream挂载到window上，方便调试
+  localStream.value = stream
   localVideo.value!.srcObject = stream
 }
 
@@ -20,6 +20,17 @@ function getMediaStream() {
   return navigator.mediaDevices.getUserMedia(constraints)
 }
 
+function call() {
+  // 先将RTC连接对象创建好
+  const pc1 = new RTCPeerConnection()
+  const pc2 = new RTCPeerConnection()
+
+  pc1.onicecandidate = (e) => {
+    if (e.candidate)
+      pc2.addIceCandidate(e.candidate)
+  }
+}
+
 onMounted(() => {
   init()
 })
@@ -27,10 +38,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <video
-      ref="localVideo" autoplay playsinline
-      absolute
-      @mousedown="mousedownHanlder"
-    />
+    <video ref="localVideo" />
+    <video ref="remoteVideo" />
   </div>
 </template>

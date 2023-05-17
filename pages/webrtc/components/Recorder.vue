@@ -116,12 +116,12 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <div max-h="300px" p-2 b="1px dashed gray" overflow-y-auto>
-      <div v-if="isRecording" h-full flex-center flex-col>
+    <div h="300px" p-2 b="1px dashed gray" overflow-y-auto flex-center>
+      <div v-if="isRecording">
         <div i-carbon:recording-filled text-red-4 text-5xl />
         <p>Recording</p>
       </div>
-      <video v-else ref="replayVideo" w-full />
+      <video v-else ref="replayVideo" h-full w-auto />
     </div>
 
     <div

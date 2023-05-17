@@ -8,14 +8,18 @@ import NAT from './components/Nat.vue'
 import PeerConect from './components/PeerConect.vue'
 
 import Base from './base.vue'
+import LocalP2P from './localP2P.vue'
+
 import { icons } from './config'
 import { IconTypes } from './enum'
 
 const drawerVisible = ref(false)
 const types = ref<IconTypes>(IconTypes.NONE)
-function showDrawer(type: IconTypes) {
+const baseon = ref('Base')
+function showDrawer(type: IconTypes, baseOn: string) {
   drawerVisible.value = true
   types.value = type
+  baseon.value = baseOn
 }
 
 function ifSupportWebRTC() {
@@ -47,12 +51,13 @@ onMounted(() => {
           <div
             :class="icon.icon"
             w-6 h-6 text-dark-1 hover="text-teal-600" transition duration-500
-            @click="showDrawer(icon.type)"
+            @click="showDrawer(icon.type, icon.baseon)"
           />
         </Ntag>
       </div>
       <div flex-1 h-full>
-        <Base />
+        <Base v-if="baseon === 'Base'" />
+        <LocalP2P v-if="baseon === 'LocalP2P'" />
       </div>
     </div>
     <NDrawer :visible="drawerVisible" @update:visible="drawerVisible = $event">
