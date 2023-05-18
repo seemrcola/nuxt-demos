@@ -35,7 +35,7 @@ onMounted(() => {
 <template>
   <div w="100vw" h="100vh" overflow-hidden>
     <div h="40px" w-full flex-center b-b="solid 1px gray-300">
-      <strong>WebRTC Study</strong>
+      <strong>WebRTC Demo</strong>
     </div>
     <div flex h="[calc(100vh-40px)]">
       <div
