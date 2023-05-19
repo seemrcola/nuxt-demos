@@ -6,14 +6,14 @@ const list: any[] = []
 for (let i = 0; i < length; i++)
   list.push({ text: i })
 
-const { init, renderList } = useVitrualList(
+const vitrualList = useVitrualList(
   list,
   '.container',
   {
     itemHeight: 40,
     containerHeight: 400,
-    // buffer: 50,
   })
+const { init, renderList, renderOffsetStyle } = vitrualList
 init()
 </script>
 
@@ -25,6 +25,7 @@ init()
     >
       <div
         v-for="(item, index) of renderList" :key="index"
+        :style="renderOffsetStyle"
         bg="gray-200" p-4 b="1px solid #eee"
         h="40px"
       >
