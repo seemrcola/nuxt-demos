@@ -4,14 +4,14 @@ interface Options {
   buffer?: number // 缓冲个数（可选，默认为 0）
 }
 
-// ------------------------------------->--
-// -                                   -> y
-// -                                   ->-- renderOffset.value----------------->>
-// ------------------------------------- -- renderOffset.value----------------->>
-// -                                   - -                              - containerHeight
-// -                                   -                                ->>
-// ------------------------------------- -                              ->>
-// -                                   ---------------------------------->>
+// ------------------------------------->--->
+// -                                   ->   y
+// -                                   ->-- renderOffset.value----------------->>--------------->>
+// ------------------------------------- -- renderOffset.value----------------->>              -
+// -                                   - -                                          containerHeight
+// -                                   -                                                       -
+// ------------------------------------- -                                                     -
+// -                                   --------------------------------------------------------->>
 // -                                   -
 // -------------------------------------
 
@@ -49,8 +49,7 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     const { deltaY } = e
     vitrualOffset += deltaY
     // 越界判断
-    if (overflow(deltaY))
-      return
+    overflow(deltaY)
     // 计算渲染区间
     calcBlocks(vitrualOffset)
   }
@@ -62,8 +61,8 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
       return true
     }
     // 当滚动到底部时，不再向下滚动
-    if (deltaY > 0 && vitrualOffset >= itemHeight * list.length) {
-      vitrualOffset = itemHeight * list.length
+    if (deltaY > 0 && vitrualOffset >= (list.length - renderCount) * itemHeight) {
+      vitrualOffset = (list.length - renderCount) * itemHeight
       return true
     }
     return false

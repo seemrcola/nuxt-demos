@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import { useVitrualList } from './useVitrualList'
 
-const length = 100000
+const length = 5000
 const list: any[] = []
 for (let i = 0; i < length; i++)
   list.push({ text: i })
