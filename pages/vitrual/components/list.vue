@@ -12,6 +12,7 @@ const { init, renderList } = useVitrualList(
   {
     itemHeight: 40,
     containerHeight: 400,
+    // buffer: 50,
   })
 init()
 </script>
@@ -24,7 +25,7 @@ init()
     >
       <div
         v-for="(item, index) of renderList" :key="index"
-        bg="gray" p-4 b="1px solid #eee"
+        bg="gray-200" p-4 b="1px solid #eee"
         h="40px"
       >
         {{ item.text }}
