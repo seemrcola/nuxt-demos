@@ -9,18 +9,7 @@ for (let i = 0; i < length; i++)
 // ==============================
 
 // =======icons===================
-const icons = [
-  'i-tabler:brand-vscode',
-  'i-tabler:brand-github',
-  'i-tabler:brand-chrome',
-  'i-tabler:brand-firefox',
-  'i-tabler:brand-edge',
-  'i-tabler:brand-opera',
-  'i-tabler:brand-safari',
-  'i-tabler:brand-figma',
-  'i-tabler:brand-framer',
-  'i-tabler:brand-sketch',
-]
+
 // ==============================
 
 // ====== useVitrualList =========
@@ -28,7 +17,7 @@ const vitrualList = useVitrualList(
   list,
   '.container',
   {
-    itemHeight: 80,
+    itemHeight: 150,
     containerHeight: 600,
   },
 )
@@ -41,12 +30,12 @@ init()
   <div>
     <div
       class="container"
-      w="300px" h="600px" max-h="600px"
+      w="350px" h="600px" max-h="600px"
       b="1px solid gray"
       overflow-auto
     >
       <div
-        v-for="(item, index) of renderList" :key="index"
+        v-for="(item) of renderList" :key="item.text"
         :style="renderOffsetStyle"
         bg="white"
         h="150px"
@@ -60,7 +49,9 @@ init()
           b="1px dashed gray"
         >
           <div flex-center flex-1>
-            <div h-12 w-12 :class="icons[index % 10]" />
+            <p text-sm>
+              我是一段文本内容
+            </p>
           </div>
           <div flex-center h-10 bg="gray-100">
             {{ item.text }}
