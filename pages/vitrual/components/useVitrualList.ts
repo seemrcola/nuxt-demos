@@ -38,7 +38,7 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     container.style.maxHeight = `${containerHeight}px` // 设置容器高度
     container.style.overflow = 'hidden' // 设置隐藏溢出部分
 
-    container.addEventListener('wheel', wheelHandler)
+    container.addEventListener('wheel', throttle(wheelHandler, 16))
     renderList.value = list
     calcBlocks(0)
   }
@@ -89,6 +89,19 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     //   end: ${end},
     // `)
     return [start, end + 1]
+  }
+
+  // throttle函数实现
+  function throttle(this: any, fn: Function, delay: number) {
+    let timer: any = null
+    return (...args: any[]) => {
+      if (!timer) {
+        timer = setTimeout(() => {
+          fn.apply(this, args)
+          timer = null
+        }, delay)
+      }
+    }
   }
 
   // 写一个二分查找算法
