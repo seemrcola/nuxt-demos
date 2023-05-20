@@ -79,7 +79,7 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     // 首先要理解我们找到的是下标，比如我们start是8，那么实际上找到的是第9个元素，也就是说前面有8个元素，那么我们要偏移的距离就是8个元素的高度
     // 所以这里的最大超过高度vitrualOffset的是 start * itemHeight
     const heightSum = start * itemHeight
-    renderOffset.value = y - (heightSum - itemHeight)
+    renderOffset.value = itemHeight - (heightSum - y) // 这一步就是计算偏移
     if (heightSum === y) // 如果刚好等于时，不需要偏移
       renderOffset.value = 0
     // ========================================================
@@ -88,7 +88,10 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     //   start: ${start},
     //   end: ${end},
     // `)
-    return [start, end + 1]
+    // start可能为0,此时做-1
+    if (start === 0)
+      return [0, end + 1]
+    return [start - 1, end + 1]
   }
 
   // throttle函数实现
