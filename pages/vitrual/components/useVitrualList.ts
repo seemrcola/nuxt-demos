@@ -35,6 +35,7 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
       return
     container.style.position = 'relative' // 设置为相对定位
     container.style.height = `${containerHeight}px` // 设置容器高度
+    container.style.maxHeight = `${containerHeight}px` // 设置容器高度
     container.style.overflow = 'hidden' // 设置隐藏溢出部分
 
     container.addEventListener('wheel', wheelHandler)
