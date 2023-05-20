@@ -3,20 +3,6 @@ interface Options {
   containerHeight: number // 容器高度
 }
 
-// ------------------------------------->--->
-// -                                   ->   y
-// -                                   ->-- renderOffset.value----------------->>--------------->>
-// ------------------------------------- -- renderOffset.value----------------->>              -
-// -                                   - -                                          containerHeight
-// -                                   -                                                       -
-// ------------------------------------- -                                                     -
-// -                                   --------------------------------------------------------->>
-// -                                   -
-// -------------------------------------
-
-// 类似无限滚动的列表，只渲染可视区域的元素，其他元素不渲染，减少渲染次数，提高性能
-// 使用方法：在需要使用的组件中引入 useVitrualList，然后调用 init 方法初始化，传入参数
-
 export function useVitrualList(list: any[], selector: string, options: Options) {
   const { itemHeight, containerHeight } = options
   let vitrualOffset = 0 // 滚动高度
@@ -69,28 +55,23 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     return false
   }
 
-  function calcBlocks(y: number) {
-    // y 就是 vitrualOffset，即滚动高度
+  function calcBlocks(vitrualOffset: number) {
     // 计算渲染区间==============================================
-    const start = bs(list.length)
-    const end = start + renderCount
+    // 我们二分查找返回的就是第一个大于 vitrualOffset 的值的下标
+    // 需要注意的是我们执行 mid * itemHeight 的时候，mid是8，则表示前8个元素的高度总和。
+    const start = bs(list.length) // start * itemHeight 必定大大于 vitrualOffset，且start不代表开始下标，而是前start个元素的高度总和
+    const end = start + renderCount // 计算end
     // ========================================================
     // 计算偏移量================================================
-    // 首先要理解我们找到的是下标，比如我们start是8，那么实际上找到的是第9个元素，也就是说前面有8个元素，那么我们要偏移的距离就是8个元素的高度
-    // 所以这里的最大超过高度vitrualOffset的是 start * itemHeight
     const heightSum = start * itemHeight
-    renderOffset.value = itemHeight - (heightSum - y) // 这一步就是计算偏移
-    if (heightSum === y) // 如果刚好等于时，不需要偏移
-      renderOffset.value = 0
+    renderOffset.value = itemHeight - (heightSum - vitrualOffset)
     // ========================================================
-    // console.log(`
-    //   renderOffset: ${renderOffset.value},
-    //   start: ${start},
-    //   end: ${end},
-    // `)
-    // start可能为0,此时做-1
-    if (start === 0)
-      return [0, end + 1]
+    console.log(`
+      renderOffset: ${renderOffset.value},
+      start: ${start},
+      end: ${end},
+    `)
+    // 总和处理成下标，我们做个-1
     return [start - 1, end + 1]
   }
 
@@ -120,7 +101,7 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
       else if (offset < vitrualOffset)
         left = mid
       else
-        return mid
+        return mid + 1
     }
     return left + 1
   }
