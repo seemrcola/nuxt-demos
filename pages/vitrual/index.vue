@@ -3,7 +3,7 @@ import List from './components/list.vue'
 </script>
 
 <template>
-  <div>
+  <div flex-center p-4>
     <ClientOnly>
       <List />
     </ClientOnly>

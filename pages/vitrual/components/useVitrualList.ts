@@ -1,7 +1,6 @@
 interface Options {
   itemHeight: number // 单个元素高度
   containerHeight: number // 容器高度
-  buffer?: number // 缓冲个数（可选，默认为 0）
 }
 
 // ------------------------------------->--->
@@ -19,11 +18,10 @@ interface Options {
 // 使用方法：在需要使用的组件中引入 useVitrualList，然后调用 init 方法初始化，传入参数
 
 export function useVitrualList(list: any[], selector: string, options: Options) {
-  const { itemHeight, containerHeight, buffer = 0 } = options
+  const { itemHeight, containerHeight } = options
   let vitrualOffset = 0 // 滚动高度
   // 缓存长度=======================
-  const bufferStart = 0
-  const bufferEnd = 0
+  // todo-------------------------
   // =============================
   const renderOffset = ref(0) // 渲染偏移量
   const renderList = ref<any[]>([]) // 渲染列表
@@ -51,7 +49,9 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     // 越界判断
     overflow(deltaY)
     // 计算渲染区间
-    calcBlocks(vitrualOffset)
+    const [start, end] = calcBlocks(vitrualOffset)
+    // 渲染
+    render(list.slice(start, end))
   }
 
   function overflow(deltaY: number) {
@@ -69,18 +69,20 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
   }
 
   function calcBlocks(y: number) {
+    // y 就是 vitrualOffset，即滚动高度
     // 计算渲染区间==============================================
     const start = bs(list.length)
     const end = start + renderCount
     // ========================================================
     // 计算偏移量================================================
+    // 首先要理解我们找到的是下标，比如我们start是8，那么实际上找到的是第9个元素，也就是说前面有8个元素，那么我们要偏移的距离就是8个元素的高度
+    // 所以这里的最大超过高度vitrualOffset的是 start * itemHeight
     const heightSum = start * itemHeight
     renderOffset.value = y - (heightSum - itemHeight)
     if (heightSum === y) // 如果刚好等于时，不需要偏移
       renderOffset.value = 0
     // ========================================================
-    const items = list.slice(start, end + 1)
-    return render(items)
+    return [start, end + 1]
   }
 
   // 写一个二分查找算法
