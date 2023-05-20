@@ -8,10 +8,6 @@ for (let i = 0; i < length; i++)
   list.push({ text: i })
 // ==============================
 
-// =======icons===================
-
-// ==============================
-
 // ====== useVitrualList =========
 const vitrualList = useVitrualList(
   list,

@@ -83,11 +83,11 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     if (heightSum === y) // 如果刚好等于时，不需要偏移
       renderOffset.value = 0
     // ========================================================
-    console.log(`
-      renderOffset: ${renderOffset.value},
-      start: ${start},
-      end: ${end},
-    `)
+    // console.log(`
+    //   renderOffset: ${renderOffset.value},
+    //   start: ${start},
+    //   end: ${end},
+    // `)
     return [start, end + 1]
   }
 
