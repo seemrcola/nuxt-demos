@@ -25,8 +25,8 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     container.style.overflow = 'hidden' // 设置隐藏溢出部分
 
     container.addEventListener('wheel', throttle(wheelHandler, 16))
-    renderList.value = list
-    calcBlocks(0)
+    const [start, end] = calcBlocks(0)
+    render(list.slice(start, end))
   }
 
   function wheelHandler(e: WheelEvent) {
