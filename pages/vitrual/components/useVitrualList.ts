@@ -66,11 +66,11 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     const heightSum = start * itemHeight
     renderOffset.value = itemHeight - (heightSum - vitrualOffset)
     // ========================================================
-    console.log(`
-      renderOffset: ${renderOffset.value},
-      start: ${start},
-      end: ${end},
-    `)
+    // console.log(`
+    //   renderOffset: ${renderOffset.value},
+    //   start: ${start},
+    //   end: ${end},
+    // `)
     // 总和处理成下标，我们做个-1
     return [start - 1, end + 1]
   }
