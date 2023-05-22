@@ -5,7 +5,7 @@ interface Options {
 }
 
 export function useVitrualList(list: any[], selector: string, options: Options) {
-  // =====================================滚动相关================================================================
+  // 滚动相关变量>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   const { itemHeight, containerHeight } = options
   let vitrualOffset = 0 // 滚动高度
   // 缓存长度=======================
@@ -16,6 +16,15 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
   // 渲染数量
   const renderCount = Math.ceil(containerHeight / itemHeight)
 
+  // 滚动条相关变量>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  const { scrollbar = false } = options // 是否显示滚动条
+  let moveLock = false // 滚动条移动锁
+  let startY = 0 // 鼠标按下时的位置
+  let deltaY = 0 // 鼠标移动的距离
+  let barHeight = 0 // 滚动条高度
+  const scrollbarRef = ref<HTMLElement | null>(null) // 滚动条ref
+
+  // =====================================滚动相关================================================================
   function initContainer() {
     const container = document.querySelector(selector) as HTMLElement
 
@@ -41,6 +50,10 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     const [start, end] = calcBlocks(vitrualOffset)
     // 渲染
     render(list.slice(start, end))
+    // !! 滚动条位置变更=========================================
+    const top = transformVitrualToCssTop(vitrualOffset)
+    scrollbarRef.value!.style.top = `${top}px`
+    // !!======================================================
   }
 
   function overflow(deltaY: number) {
@@ -127,12 +140,7 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
   // ======================================================滚动相关end======================================================
 
   // =======================================================模拟滚动条=========================================================
-  const { scrollbar = false } = options
-  let moveLock = false
-  let startY = 0
-  let deltaY = 0
-  let barHeight = 0
-  const scrollbarRef = ref<HTMLElement | null>(null)
+
   function generateScrollbar() {
     const scrollbar = document.createElement('div')
     scrollbar.className = '--scrollbar--'
@@ -230,24 +238,16 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     // 滚动条移动的距离，转换成列表移动的距离，需要乘以一个比例
     transformCssTopToVitrualOffset(finalCssTop)
 
-    // 根据偏移量，计算出列表的下标，然后渲染列表
+    // !!根据偏移量，计算出列表的下标，然后渲染列表=========
     const [start, end] = calcBlocks(vitrualOffset)
     render(list.slice(start, end))
+    // !!============================================
   }
 
   function scrollbarMouseUpHandler(e: MouseEvent) {
     moveLock = false
     document.removeEventListener('mousemove', scrollbarMouseMoveHandler)
     document.removeEventListener('mouseup', scrollbarMouseUpHandler)
-  }
-
-  function transformCssTopToVitrualOffset(cssTop: number) {
-    // 滚动条的css top值，转换成列表的偏移量
-    const listHeight = list.length * itemHeight - containerHeight
-    const scrollHeight = containerHeight - barHeight
-    const ratio = listHeight / scrollHeight
-    vitrualOffset = cssTop * ratio
-    renderOffset.value = vitrualOffset
   }
 
   function cssOverflow(cssTop: number) {
@@ -262,6 +262,26 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
 
   scrollbar && initScrollbar()
   // ========================================================================================================================
+
+  // ===========================================转换工具===========================================
+  function transformCssTopToVitrualOffset(cssTop: number) {
+    // 滚动条的css top值，转换成列表的偏移量
+    const listHeight = list.length * itemHeight - containerHeight
+    const scrollHeight = containerHeight - barHeight
+    const ratio = listHeight / scrollHeight
+    vitrualOffset = cssTop * ratio
+    renderOffset.value = vitrualOffset
+  }
+
+  function transformVitrualToCssTop(vitrualOffset: number) {
+    // 列表的偏移量，转换成滚动条的css top值
+    const listHeight = list.length * itemHeight - containerHeight
+    const scrollHeight = containerHeight - barHeight
+    const ratio = listHeight / scrollHeight
+    const cssTop = vitrualOffset / ratio
+    return cssTop
+  }
+  // ==================================================================================
 
   return {
     init,

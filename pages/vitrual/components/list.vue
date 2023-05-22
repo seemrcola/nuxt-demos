@@ -2,7 +2,7 @@
 import { useVitrualList } from './useVitrualList'
 
 // ==== 5000 items ===============
-const length = 10000
+const length = 50
 const list: any[] = []
 for (let i = 0; i < length; i++)
   list.push({ text: i })
@@ -50,7 +50,7 @@ init()
               我是一段文本内容{{ item.text }}
             </p>
           </div>
-          <div flex-center h-10 bg="gray-100">
+          <div flex-center h="40px" bg="gray-100">
             {{ item.text }}
           </div>
         </div>
