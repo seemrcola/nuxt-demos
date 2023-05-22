@@ -8,18 +8,19 @@ for (let i = 0; i < length; i++)
   list.push({ text: i })
 // ==============================
 
-// ====== useVitrualList =========
+// ====== useVitrualList ==============
 const vitrualList = useVitrualList(
   list,
   '.container',
   {
     itemHeight: 150,
     containerHeight: 600,
+    scrollbar: true,
   },
 )
 const { init, renderList, renderOffsetStyle } = vitrualList
 init()
-// ==============================
+// ====================================
 </script>
 
 <template>

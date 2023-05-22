@@ -1,9 +1,11 @@
 interface Options {
   itemHeight: number // 单个元素高度
   containerHeight: number // 容器高度
+  scrollbar?: boolean // 是否显示滚动条
 }
 
 export function useVitrualList(list: any[], selector: string, options: Options) {
+  // =====================================滚动相关================================================================
   const { itemHeight, containerHeight } = options
   let vitrualOffset = 0 // 滚动高度
   // 缓存长度=======================
@@ -122,6 +124,144 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
       initContainer()
     })
   }
+  // ======================================================滚动相关end======================================================
+
+  // =======================================================模拟滚动条=========================================================
+  const { scrollbar = false } = options
+  let moveLock = false
+  let startY = 0
+  let deltaY = 0
+  let barHeight = 0
+  const scrollbarRef = ref<HTMLElement | null>(null)
+  function generateScrollbar() {
+    const scrollbar = document.createElement('div')
+    scrollbar.className = '--scrollbar--'
+    const heightSum = list.length * itemHeight
+    let barH = (containerHeight / heightSum) * containerHeight
+    if (barH < 10) // 给订一个最小高度
+      barH = 10
+    barHeight = barH
+
+    const position = 'absolute'
+    const right = '0'
+    const top = '0'
+    const height = `${barH}px`
+    const width = '8px'
+    const backgroundColor = 'rgba(0,0,0,.6)'
+    const borderRadius = '2px'
+    const zIndex = '999'
+    const cursor = 'pointer'
+
+    scrollbar.style.cssText = `
+      position: ${position};
+      right: ${right};
+      top: ${top};
+      width: ${width};
+      height: ${height};
+      background-color: ${backgroundColor};
+      border-radius: ${borderRadius};
+      z-index: ${zIndex};
+      cursor: ${cursor};
+    `
+    scrollbarRef.value = scrollbar
+    return scrollbar
+  }
+
+  function generateScrollbarWrapper() {
+    const wrapper = document.createElement('div')
+    wrapper.className = '--scrollbar-wrapper--'
+
+    const height = `${containerHeight}px`
+    const width = '8px'
+    const position = 'absolute'
+    const right = '0'
+    const top = '0'
+    const backgroundColor = 'rgba(0,0,0,.3)'
+    const borderRadius = '3px'
+    const zIndex = '999'
+
+    wrapper.style.cssText = `
+      height: ${height};
+      width: ${width};
+      position: ${position};
+      right: ${right};
+      top: ${top};
+      background-color: ${backgroundColor};
+      border-radius: ${borderRadius};
+      z-index: ${zIndex};
+    `
+
+    return wrapper
+  }
+
+  function initScrollbar() {
+    const scrollbar = generateScrollbar()
+    const wrapper = generateScrollbarWrapper()
+    nextTick(() => {
+      wrapper.appendChild(scrollbar)
+      const container = document.querySelector(selector) as HTMLElement
+      container.appendChild(wrapper)
+      scrollbar.addEventListener('mousedown', scrollbarMouseDownHandler)
+    })
+  }
+
+  function scrollbarMouseDownHandler(e: MouseEvent) {
+    e.preventDefault()
+    moveLock = true
+    const { clientY } = e
+    startY = clientY
+    document.addEventListener('mousemove', scrollbarMouseMoveHandler)
+    document.addEventListener('mouseup', scrollbarMouseUpHandler)
+  }
+
+  function scrollbarMouseMoveHandler(e: MouseEvent) {
+    if (!moveLock)
+      return
+    const { clientY } = e
+    deltaY = clientY - startY
+    startY = clientY
+    // 滚动条的移动距离
+    const top = parseInt(scrollbarRef.value!.style.top)
+    const cssTop = top + deltaY // 滚动条的css top值
+    const finalCssTop = cssOverflow(cssTop) // 滚动条的css top值经过处理后的值
+
+    scrollbarRef.value!.style.top = `${finalCssTop}px`
+
+    // 滚动条移动的距离，转换成列表移动的距离，需要乘以一个比例
+    transformCssTopToVitrualOffset(finalCssTop)
+
+    // 根据偏移量，计算出列表的下标，然后渲染列表
+    const [start, end] = calcBlocks(vitrualOffset)
+    render(list.slice(start, end))
+  }
+
+  function scrollbarMouseUpHandler(e: MouseEvent) {
+    moveLock = false
+    document.removeEventListener('mousemove', scrollbarMouseMoveHandler)
+    document.removeEventListener('mouseup', scrollbarMouseUpHandler)
+  }
+
+  function transformCssTopToVitrualOffset(cssTop: number) {
+    // 滚动条的css top值，转换成列表的偏移量
+    const listHeight = list.length * itemHeight - containerHeight
+    const scrollHeight = containerHeight - barHeight
+    const ratio = listHeight / scrollHeight
+    vitrualOffset = cssTop * ratio
+    renderOffset.value = vitrualOffset
+  }
+
+  function cssOverflow(cssTop: number) {
+    // 滚动条css top小于0，表示滚动到顶部了
+    if (cssTop < 0)
+      cssTop = 0
+    // 滚动条css top大于容器高度减去滚动条高度，表示滚动到底部了
+    if (cssTop > containerHeight - barHeight)
+      cssTop = containerHeight - barHeight
+    return cssTop
+  }
+
+  scrollbar && initScrollbar()
+  // ========================================================================================================================
 
   return {
     init,
