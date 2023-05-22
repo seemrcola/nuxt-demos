@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import { useVitrualList } from './useVitrualList'
 
-// ==== 5000 items ===============
+// ==== 10000 items ===============
 const length = 10000
 const list: any[] = []
 for (let i = 0; i < length; i++)
