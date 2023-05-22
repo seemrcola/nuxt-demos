@@ -1,5 +1,6 @@
 <script setup lang='ts'>
 import List from './components/list.vue'
+import ListSimple from './components/list-simple.vue'
 </script>
 
 <template>
@@ -12,7 +13,11 @@ import List from './components/list.vue'
         模拟滚动的方案【不使用原生滚动条-非高度撑开方案】
       </div>
       <ClientOnly>
-        <List flex-center />
+        <div flex-center>
+          <List />
+          <div w-10 />
+          <ListSimple />
+        </div>
       </ClientOnly>
     </div>
   </div>
