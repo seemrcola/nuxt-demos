@@ -116,7 +116,6 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     const height = `${barH}px`
     const width = '8px'
     const backgroundColor = 'rgba(0,0,0,.6)'
-    const borderRadius = '2px'
     const zIndex = '999'
     const cursor = 'pointer'
 
@@ -127,7 +126,6 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
       width: ${width};
       height: ${height};
       background-color: ${backgroundColor};
-      border-radius: ${borderRadius};
       z-index: ${zIndex};
       cursor: ${cursor};
     `
@@ -145,7 +143,6 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     const right = '0'
     const top = '0'
     const backgroundColor = 'rgba(0,0,0,.3)'
-    const borderRadius = '3px'
     const zIndex = '999'
 
     wrapper.style.cssText = `
@@ -155,7 +152,6 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
       right: ${right};
       top: ${top};
       background-color: ${backgroundColor};
-      border-radius: ${borderRadius};
       z-index: ${zIndex};
     `
 
