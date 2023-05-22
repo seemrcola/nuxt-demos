@@ -106,16 +106,16 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     scrollbar.className = '--scrollbar--'
     const heightSum = list.length * itemHeight
     let barH = (containerHeight / heightSum) * containerHeight
-    if (barH < 10) // 给订一个最小高度
-      barH = 10
+    if (barH < 15) // 给订一个最小高度
+      barH = 15
     barHeight = barH
 
     const position = 'absolute'
     const right = '0'
     const top = '0'
     const height = `${barH}px`
-    const width = '8px'
-    const backgroundColor = 'rgba(0,0,0,.6)'
+    const width = '10px'
+    const backgroundColor = 'rgba(40,40,40,.8)'
     const zIndex = '999'
     const cursor = 'pointer'
 
@@ -138,11 +138,11 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     wrapper.className = '--scrollbar-wrapper--'
 
     const height = `${containerHeight}px`
-    const width = '8px'
+    const width = '10px'
     const position = 'absolute'
     const right = '0'
     const top = '0'
-    const backgroundColor = 'rgba(0,0,0,.3)'
+    const backgroundColor = 'rgba(40,40,40,.3)'
     const zIndex = '999'
 
     wrapper.style.cssText = `
