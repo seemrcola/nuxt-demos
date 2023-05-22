@@ -2,7 +2,7 @@
 import { useVitrualList } from './useVitrualList'
 
 // ==== 5000 items ===============
-const length = 50
+const length = 10000
 const list: any[] = []
 for (let i = 0; i < length; i++)
   list.push({ text: i })
