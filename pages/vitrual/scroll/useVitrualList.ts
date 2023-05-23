@@ -48,10 +48,12 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
   }
 
   function render(start: number, end: number) {
-    start = Math.max(start - buffer, 0)
-    end = Math.min(end + buffer, list.length)
-    translateY.value = start * itemHeight
-    renderList.value = list.slice(start, end)
+    requestAnimationFrame(() => {
+      start = Math.max(start - buffer, 0)
+      end = Math.min(end + buffer, list.length)
+      translateY.value = start * itemHeight
+      renderList.value = list.slice(start, end)
+    })
   }
 
   // 处理偏移
