@@ -24,7 +24,7 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     // 将填充容器插入到容器中
     container.appendChild(filled)
     // 监听滚动事件
-    container.addEventListener('scroll', throttle(handlerScroll, 16))
+    container.addEventListener('scroll', handlerScroll)
   }
 
   function generaterFilled() {
@@ -43,28 +43,16 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     if (top < 0 || top > HEIGHT_SUM)
       return
 
-    let start = 0
-    let end = 0
-    if (!ifFastScroll(top))
-      start = Math.floor(top / itemHeight)
-    else
-      start = bs(list.length)
-    end = start + RENDER_COUNT
-
+    const start = Math.floor(top / itemHeight)
+    const end = start + RENDER_COUNT
     offsetTop = top
-    translateY.value = top - buffer * itemHeight
+    translateY.value = top
     render(start, end)
   }
 
-  function ifFastScroll(top: number) {
-    // 当每次回调函数执行的时候，拖动量大于一屏加上缓冲区的时候，就认为这是一次快速滚动
-    const isFastScroll = Math.abs(top - offsetTop) > (RENDER_COUNT + buffer) * itemHeight
-    return isFastScroll
-  }
-
   function render(start: number, end: number) {
-    start = Math.max(start - buffer, 0)
-    end = Math.min(end + buffer, list.length)
+    start = Math.max(start, 0)
+    end = Math.min(end, list.length)
     renderList.value = list.slice(start, end)
   }
 
@@ -73,37 +61,6 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
       transform: `translateY(${translateY.value}px)`,
     }
   })
-
-  // throttle函数实现
-  function throttle(this: any, fn: Function, delay: number) {
-    let timer: any = null
-    return (...args: any[]) => {
-      if (!timer) {
-        timer = setTimeout(() => {
-          fn.apply(this, args)
-          timer = null
-        }, delay)
-      }
-    }
-  }
-
-  // 实现二分查找
-  // 找到第一个刚好不大于offsetTop的元素
-  function bs(len: number) {
-    let left = -1
-    let right = len + 1
-    while (left < right - 1) {
-      const mid = (left + right) >> 1
-      const offset = mid * itemHeight
-      if (offset > offsetTop)
-        right = mid
-      else if (offset < offsetTop)
-        left = mid
-      else
-        return mid
-    }
-    return left
-  }
 
   function init() {
     nextTick(() => {
