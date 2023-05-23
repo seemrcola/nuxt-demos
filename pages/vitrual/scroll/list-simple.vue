@@ -15,10 +15,9 @@ const vitrualList = useVitrualList(
   {
     itemHeight: 40,
     containerHeight: 600,
-    scrollbar: true,
   },
 )
-const { init, renderList, renderOffsetStyle } = vitrualList
+const { init, renderList, itemStyle } = vitrualList
 init()
 // ====================================
 </script>
@@ -27,17 +26,19 @@ init()
   <div>
     <div
       class="container-simple"
-      w="350px" h="600px" max-h="600px"
+      w="350px" h="600px"
       b="1px solid gray"
       overflow-auto
     >
       <div
         v-for="(item) of renderList" :key="item.text"
-        :style="renderOffsetStyle"
         bg="white"
         h="40px"
+        :style="{
+          ...itemStyle,
+        }"
       >
-        <div h-full flex items-center pl-4 b="1px dashed gray">
+        <div h-full flex-center b="1px dashed gray">
           #Title {{ item.text }}
         </div>
       </div>

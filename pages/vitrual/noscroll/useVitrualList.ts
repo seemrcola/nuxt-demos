@@ -112,13 +112,14 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     barHeight = barH
 
     const position = 'absolute'
-    const right = '0'
+    const right = '2px'
     const top = '0'
     const height = `${barH}px`
-    const width = '10px'
-    const backgroundColor = 'rgba(40,40,40,.8)'
+    const width = '8px'
+    const backgroundColor = '#c1c1c1'
     const zIndex = '999'
     const cursor = 'pointer'
+    const borderRadius = '5px'
 
     scrollbar.style.cssText = `
       position: ${position};
@@ -129,6 +130,7 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
       background-color: ${backgroundColor};
       z-index: ${zIndex};
       cursor: ${cursor};
+      border-radius: ${borderRadius};
     `
     scrollbarRef.value = scrollbar
     return scrollbar
@@ -139,11 +141,11 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     wrapper.className = '--scrollbar-wrapper--'
 
     const height = `${containerHeight}px`
-    const width = '10px'
+    const width = '14px'
     const position = 'absolute'
     const right = '0'
     const top = '0'
-    const backgroundColor = 'rgba(40,40,40,.3)'
+    const backgroundColor = '#fafafa'
     const zIndex = '999'
 
     wrapper.style.cssText = `
