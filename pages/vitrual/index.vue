@@ -1,8 +1,9 @@
 <script setup lang='ts'>
 import List from './noscroll/list.vue'
 import ListSimple from './noscroll/list-simple.vue'
+import ListScroll from './scroll/list.vue'
 
-const status = ref('noscroll')
+const status = ref('scroll')
 </script>
 
 <template>
@@ -24,7 +25,7 @@ const status = ref('noscroll')
           <ListSimple />
         </div>
         <div v-else>
-          00
+          <ListScroll />
         </div>
       </ClientOnly>
     </div>
