@@ -44,9 +44,9 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
       return
 
     const start = Math.floor(top / itemHeight)
-    const end = start + RENDER_COUNT
+    const end = start + RENDER_COUNT + 1
     offsetTop = top
-    translateY.value = top
+    translateY.value = start * itemHeight
     render(start, end)
   }
 
@@ -56,6 +56,7 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     renderList.value = list.slice(start, end)
   }
 
+  // 处理偏移
   const itemStyle = computed(() => {
     return {
       transform: `translateY(${translateY.value}px)`,
