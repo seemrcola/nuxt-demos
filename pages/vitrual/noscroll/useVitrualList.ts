@@ -2,11 +2,12 @@ interface Options {
   itemHeight: number // 单个元素高度
   containerHeight: number // 容器高度
   scrollbar?: boolean // 是否显示滚动条
+  throttleTime?: number // 节流时间
 }
 
 export function useVitrualList(list: any[], selector: string, options: Options) {
   // 滚动相关变量>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  const { itemHeight, containerHeight } = options
+  const { itemHeight, containerHeight, throttleTime = 0 } = options
   let vitrualOffset = 0 // 滚动高度
   const renderOffset = ref(0) // 渲染偏移量
   const renderList = ref<any[]>([]) // 渲染列表
@@ -32,7 +33,7 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     container.style.maxHeight = `${containerHeight}px` // 设置容器高度
     container.style.overflow = 'hidden' // 设置隐藏溢出部分
 
-    container.addEventListener('wheel', throttle(wheelHandler, 16))
+    container.addEventListener('wheel', throttle(wheelHandler, throttleTime))
     const [start, end] = calcBlocks(0)
     render(list.slice(start, end))
   }
