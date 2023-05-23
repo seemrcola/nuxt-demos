@@ -17,8 +17,6 @@ const vitrualList = useVitrualList(
     containerHeight: 600,
   },
 )
-const { init, renderList, renderOffsetStyle } = vitrualList
-init()
 // ====================================
 </script>
 
@@ -31,8 +29,7 @@ init()
       overflow-auto
     >
       <div
-        v-for="(item) of renderList" :key="item.text"
-        :style="renderOffsetStyle"
+        v-for="(item) of list" :key="item.text"
         bg="white"
         h="150px"
       >
