@@ -5,12 +5,11 @@ interface Options {
 }
 
 export function useVitrualList(list: any[], selector: string, options: Options) {
-  let { itemHeight, containerHeight, buffer = 10 } = options
+  let { itemHeight, containerHeight, buffer = 0 } = options
   const HEIGHT_SUM = list.length * itemHeight // 总高度
   const RENDER_COUNT = Math.ceil(containerHeight / itemHeight) // 渲染数量
 
   const renderList = ref<any[]>([])
-  let offsetTop = 0
   const translateY = ref(0)
   buffer = RENDER_COUNT // 缓冲区
 
@@ -45,14 +44,13 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
 
     const start = Math.floor(top / itemHeight)
     const end = start + RENDER_COUNT + 1
-    offsetTop = top
-    translateY.value = start * itemHeight
     render(start, end)
   }
 
   function render(start: number, end: number) {
-    start = Math.max(start, 0)
-    end = Math.min(end, list.length)
+    start = Math.max(start - buffer, 0)
+    end = Math.min(end + buffer, list.length)
+    translateY.value = start * itemHeight
     renderList.value = list.slice(start, end)
   }
 
