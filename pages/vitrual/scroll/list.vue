@@ -15,7 +15,6 @@ const vitrualList = useVitrualList(
   {
     itemHeight: 150,
     containerHeight: 600,
-    scrollbar: true,
   },
 )
 const { init, renderList, renderOffsetStyle } = vitrualList
