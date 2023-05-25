@@ -4,6 +4,7 @@ import Header from './components/Header.vue'
 import CompsList from './components/CompsList.vue'
 import Settings from './components/Settings.vue'
 import CanvasContainer from './components/Container.vue'
+import Ruler from './components/Ruler.vue'
 </script>
 
 <template>
@@ -19,7 +20,9 @@ import CanvasContainer from './components/Container.vue'
     </template>
     <template #content>
       <ClientOnly>
-        <CanvasContainer />
+        <Ruler>
+          <CanvasContainer />
+        </Ruler>
       </ClientOnly>
     </template>
     <template #settings>

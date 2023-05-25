@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ruler</title>
+  <style>
+    .ruler {
+      position: relative;
+      width: 200px;
+      height: 40px;
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+      padding-top: 10px;
+    }
+
+    .ruler::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-image: linear-gradient(to right, #ffc0cb 1px, transparent 1px);
+      background-size: 20px 100%;
+      z-index: 1;
+    }
+
+    .ruler::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 40px;
+      width: 1px;
+      background-color: #000;
+      z-index: 2;
+    }
+
+    .ruler-mark {
+      position: absolute;
+      bottom: -5px;
+      width: 1px;
+      height: 10px;
+      background-color: #ff69b4;
+      z-index: 3;
+    }
+
+    .ruler-mark.short {
+      height: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="ruler">
+    <div class="ruler-mark short" style="left: 10px;"></div>
+    <div class="ruler-mark" style="left: 20px;"></div>
+    <div class="ruler-mark short" style="left: 30px;"></div>
+    <div class="ruler-mark" style="left: 40px;"></div>
+    <!-- 更多标识... -->
+  </div>
+</body>
+</html>

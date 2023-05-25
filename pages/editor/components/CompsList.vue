@@ -58,7 +58,9 @@ function findDiscribe(name: string) {
   })
 }
 function calcPosition(pointer: { x: number; y: number }) {
-  const container = document.querySelector('.canvas-target')!
+  const container = document.querySelector('.canvas-target')
+  if (!container)
+    return
   const rect = container.getBoundingClientRect()
   const { x, y } = pointer
   const { left, top } = rect

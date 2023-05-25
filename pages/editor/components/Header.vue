@@ -4,8 +4,6 @@
 
 <template>
   <div h-full flex items-center font-700 text-sm>
-    <p px-4>
-      
-    </p>
+    <p px-4 />
   </div>
 </template>

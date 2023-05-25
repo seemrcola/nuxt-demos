@@ -11,7 +11,7 @@
       <aside w="240px" b-r="1px solid #ccc">
         <slot name="sidebar" />
       </aside>
-      <div flex-1>
+      <div w="[calc(100%-540px)]" w-full>
         <slot name="content" />
       </div>
       <div w="300px" b-l="1px solid #ccc">
