@@ -1,5 +1,5 @@
 import { scrollWrapper as scrollWrapperFn, scrollbar as scrollbarFn } from './scrollbar'
-import { bs, throttle } from './utils'
+import { bs } from './utils'
 
 interface Options {
   itemHeight: number // 单个元素高度
@@ -36,12 +36,13 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     container.style.maxHeight = `${containerHeight}px` // 设置容器高度
     container.style.overflow = 'hidden' // 设置隐藏溢出部分
 
-    container.addEventListener('wheel', throttle(wheelHandler, throttleTime))
+    container.addEventListener('wheel', wheelHandler)
     const [start, end] = calcBlocks(0)
     render(list.slice(start, end))
   }
 
   function wheelHandler(e: WheelEvent) {
+    // console.log('wheel')
     e.preventDefault()
     const { deltaY } = e
     vitrualOffset += deltaY
@@ -139,6 +140,7 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
   function scrollbarMouseMoveHandler(e: MouseEvent) {
     if (!moveLock)
       return
+    // console.log('move')
     const { clientY } = e
     deltaY = clientY - startY
     startY = clientY
