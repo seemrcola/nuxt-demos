@@ -12,7 +12,7 @@ function change(type: string) {
 
 <template>
   <div text-sm>
-    <header h="50px" flex-center bg="#fafafa">
+    <header h="50px" flex-center bg="#fafafa" text-sm>
       <div btn @click="change('scroll')">
         原生滚动条方案
       </div>
@@ -41,12 +41,19 @@ function change(type: string) {
         </div>
       </ClientOnly>
     </div>
-    <footer h="50px" bg="#fafafa" flex-center>
+    <footer h="50px" bg="#fafafa" flex-center text-sm>
       <div>不定高情况下的觉得性能一般，具体实现方案可以参考这个文章</div>
-      <div>
+      <div flex-center>
         <a
           target="_blank"
           href="https://free_pan.gitee.io/freepan-blog"
+        >
+          <div i-ic:round-insert-link />
+        </a>
+        <div>和这个文章</div>
+        <a
+          target="_blank"
+          href="https://github.com/chenqf/frontEndBlog/issues/16"
         >
           <div i-ic:round-insert-link />
         </a>

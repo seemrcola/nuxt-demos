@@ -11,7 +11,7 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
 
   const renderList = ref<any[]>([])
   const translateY = ref(0)
-  buffer = RENDER_COUNT >> 1 // 缓冲区
+  buffer = RENDER_COUNT // 缓冲区
 
   function initContainer() {
     const container = document.querySelector(selector) as HTMLElement
