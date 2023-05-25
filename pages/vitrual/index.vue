@@ -12,7 +12,7 @@ function change(type: string) {
 
 <template>
   <div text-sm>
-    <header h="42px" flex-center b-b="1px solid gray">
+    <header h="50px" flex-center bg="#fafafa">
       <div btn @click="change('scroll')">
         原生滚动条方案
       </div>
@@ -21,7 +21,7 @@ function change(type: string) {
         虚拟滚动条方案
       </div>
     </header>
-    <div h="[calc(100vh-42px)]" p-2 flex-col>
+    <div h="[calc(100vh-100px)]" p-2 flex-col>
       <div v-if="status === 'noscroll'" h="60px" flex-center>
         模拟滚动的方案【不使用原生滚动条-非高度撑开方案】
       </div>
@@ -41,5 +41,16 @@ function change(type: string) {
         </div>
       </ClientOnly>
     </div>
+    <footer h="50px" bg="#fafafa" flex-center>
+      <div>不定高情况下的觉得性能一般，具体实现方案可以参考这个文章</div>
+      <div>
+        <a
+          target="_blank"
+          href="https://free_pan.gitee.io/freepan-blog"
+        >
+          <div i-ic:round-insert-link />
+        </a>
+      </div>
+    </footer>
   </div>
 </template>
