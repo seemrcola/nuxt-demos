@@ -51,6 +51,9 @@ function mouseupHandler(e: MouseEvent) {
   currentComponent.value = ''
   mousedownSnapshotName = ''
   currentDescribe = ''
+
+  document.removeEventListener('mousemove', mousemoveHandler)
+  document.removeEventListener('mouseup', mouseupHandler)
 }
 function findDiscribe(name: string) {
   return [...BasicDescribes, ...ShapeDescribes].find((describe) => {

@@ -1,12 +1,12 @@
 <script setup lang='ts'>
 // 无信令服务器的P2P通信
 
-import { useDrag } from '~/composables/useDrag'
+import { useTeleportDrag } from '~/composables/useTeleportDrag'
 
 const localVideo = ref<HTMLVideoElement | null>(null)
 const remoteVideo = ref<HTMLVideoElement | null>(null)
 
-const { mousedownHanlder } = useDrag(remoteVideo)
+const { mousedownHanlder } = useTeleportDrag(remoteVideo)
 
 const localStream = ref<MediaStream | null>(null)
 

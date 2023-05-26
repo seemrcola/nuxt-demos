@@ -9,14 +9,14 @@
       h="14px" w-full
       absolute left-0 right-0
       bg="#fafafa"
-      z-999
+      z-1
     />
     <div
       id="ruler-y"
       w="14px" h-full
       absolute left-0 right-0
       bg="#fafafa"
-      z-999
+      z-1
     />
     <slot />
   </div>

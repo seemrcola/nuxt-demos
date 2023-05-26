@@ -1,7 +1,9 @@
 /*
-* 注意：将需要drag的元素telleport到body下
+* 注意：将需要drag的元素telleport到body下, 传入dom即可实现拖拽
 */
-export function useDrag(domRef: Ref<any>) {
+import type { UseDragResult } from './types/useTeleportDrag.d'
+
+export function useTeleportDrag(domRef: Ref<any>): UseDragResult {
   let dragFlag = false
   let skewing: { x: number; y: number }
 

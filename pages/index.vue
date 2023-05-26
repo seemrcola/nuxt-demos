@@ -6,7 +6,6 @@ const demos = [
   { title: 'Clipper', desc: '一个视频裁剪工具', icon: 'i-ic:baseline-video-settings' },
   { title: 'WebRTC', desc: 'webrtc的一些例子', icon: 'i-mdi:webrtc' },
   { title: 'VitrualList', desc: '虚拟滚动的案例', icon: 'i-material-symbols:format-list-bulleted-add-rounded' },
-  { title: 'CodeMirror', desc: '自由发挥的编辑器', icon: 'i-simple-icons:codemirror' },
 ]
 
 const $router = useRouter()
@@ -19,8 +18,6 @@ function goto(route: string) {
     gotoRTC()
   if (route === 'VitrualList')
     gotoVitrual()
-  if (route === 'CodeMirror')
-    gotoCodeMirror()
 }
 
 function gotoEdit() {
@@ -34,9 +31,6 @@ function gotoRTC() {
 }
 function gotoVitrual() {
   $router.push('./vitrual')
-}
-function gotoCodeMirror() {
-  $router.push('./codemirror')
 }
 </script>
 

@@ -1,8 +1,8 @@
 <script setup lang='ts'>
-import { useDrag } from '~/composables/useDrag'
+import { useTeleportDrag } from '~/composables/useTeleportDrag'
 
 const localVideo = ref<HTMLVideoElement | null>(null)
-const { mousedownHanlder } = useDrag(localVideo)
+const { mousedownHanlder } = useTeleportDrag(localVideo)
 
 async function init() {
   const stream = await getMediaStream()

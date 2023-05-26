@@ -23,6 +23,41 @@ function midpoint() {
   return { x: 0, y: 0 }
 }
 
+// 画布拖拽
+let dragFlag = false
+const start = { x: 0, y: 0 }
+function mousedownHandler(e: MouseEvent) {
+  e.preventDefault()
+  dragFlag = true
+  containerTarget.value!.style.cursor = 'grabbing'
+  const { clientX, clientY } = e
+  start.x = clientX
+  start.y = clientY
+  document.addEventListener('mousemove', mousemoveHandler)
+  document.addEventListener('mouseup', mouseupHandler)
+}
+
+function mousemoveHandler(e: MouseEvent) {
+  if (!dragFlag || !e.shiftKey)
+    return
+
+  const { clientX, clientY } = e
+  const deltaX = clientX - start.x
+  const deltaY = clientY - start.y
+
+  containerTarget.value!.scrollLeft -= deltaX
+  containerTarget.value!.scrollTop -= deltaY
+
+  start.x = clientX
+  start.y = clientY
+}
+
+function mouseupHandler(e: MouseEvent) {
+  dragFlag = false
+  document.removeEventListener('mousemove', mousemoveHandler)
+  document.removeEventListener('mouseup', mouseupHandler)
+}
+
 onMounted(() => {
   canvasTarget.value!.addEventListener('wheel', handleMouseWheel)
   const { x, y } = midpoint()
@@ -31,6 +66,7 @@ onMounted(() => {
   canvasTarget.value!.style.left = `${x}px`
   canvasTarget.value!.style.top = `${y}px`
 })
+
 onUnmounted(() => {
   canvasTarget.value?.removeEventListener('wheel', handleMouseWheel)
 })
@@ -43,7 +79,8 @@ onUnmounted(() => {
     overflow-auto
   >
     <div
-      ref="wrapperTarget" w="5000px" h="5000px"
+      ref="wrapperTarget"
+      w="5000px" h="5000px"
       absolute left-0 top-0
     />
     <div
@@ -51,6 +88,7 @@ onUnmounted(() => {
       w="1920px" h="1080px" bg="gray-100"
       absolute z-0
       :style="canvasRender.canvasStyle"
+      @mousedown="mousedownHandler"
     >
       <!-- {{ canvasRender.components }} -->
       <NGoast
