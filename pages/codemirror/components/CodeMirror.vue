@@ -5,6 +5,7 @@ import 'codemirror/mode/javascript/javascript.js'
 import { DEFAULT_OPTIONS, DEFAULT_VALUE } from './const'
 import { fill } from './codeeverywhere'
 import { rectangle } from './rectangle'
+import { onEnterPressed, onShiftSpace } from './keysmap'
 
 const code = ref(fill(DEFAULT_VALUE))
 const textarea = ref<HTMLElement>()
@@ -13,7 +14,15 @@ onMounted(() => {
   const myTextarea = textarea.value as HTMLTextAreaElement
   editor = CodeMirror.fromTextArea(
     myTextarea,
-    DEFAULT_OPTIONS,
+    {
+      ...DEFAULT_OPTIONS,
+      extraKeys: CodeMirror.normalizeKeyMap({
+        'Tab': cm => cm.execCommand('indentMore'),
+        'Shift-Tab': cm => cm.execCommand('indentLess'),
+        'Shift-Space': onShiftSpace,
+        'Enter': onEnterPressed,
+      }),
+    },
   )
   rectangle(editor)
 })
