@@ -4,6 +4,7 @@ import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/javascript/javascript.js'
 import { DEFAULT_OPTIONS, DEFAULT_VALUE } from './const'
 import { fill } from './codeeverywhere'
+import { rectangle } from './rectangle'
 
 const code = ref(fill(DEFAULT_VALUE))
 const textarea = ref<HTMLElement>()
@@ -14,6 +15,7 @@ onMounted(() => {
     myTextarea,
     DEFAULT_OPTIONS,
   )
+  rectangle(editor)
 })
 </script>
 

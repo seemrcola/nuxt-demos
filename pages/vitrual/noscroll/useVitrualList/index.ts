@@ -1,5 +1,5 @@
 import { scrollWrapper as scrollWrapperFn, scrollbar as scrollbarFn } from './scrollbar'
-import { bs, throttle } from './utils'
+import { throttle } from './utils'
 
 interface Options {
   itemHeight: number // 单个元素高度
@@ -74,14 +74,18 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     // 计算渲染区间
     // 我们二分查找返回的就是第一个大于 vitrualOffset 的值的下标
     // 需要注意的是我们执行 mid * itemHeight 的时候，mid是8，则表示前8个元素的高度总和。
-    const start = bs(list.length, vitrualOffset, itemHeight) // start * itemHeight 必定大大于 vitrualOffset，且start不代表开始下标，而是前start个元素的高度总和
+    // const start = bs(list.length, vitrualOffset, itemHeight) // start * itemHeight 必定大大于 vitrualOffset，且start不代表开始下标，而是前start个元素的高度总和
+    // 这里没必要二分，不做动态高度的情况下，直接计算即可，依然还是找到大于等于 vitrualOffset 的item的总个数
+    let start = Math.ceil(vitrualOffset / itemHeight)
+    if (start === 0)
+      start = 1
     const end = start + RENDER_COUNT
 
     // 计算偏移量
     const heightSum = start * itemHeight
     renderOffset.value = itemHeight - (heightSum - vitrualOffset)
 
-    // 总和处理成下标，我们做个-1
+    // 总个数处理成下标，我们要做个-1
     return [start - 1, end + 1]
   }
 
