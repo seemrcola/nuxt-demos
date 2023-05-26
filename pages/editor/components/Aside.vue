@@ -3,7 +3,6 @@ import { CheckoutTypes } from '~/enums/editor.enum'
 
 const emits = defineEmits(['checkout'])
 function checkout(name: string) {
-  console.log(name)
   emits('checkout', name)
 }
 </script>
