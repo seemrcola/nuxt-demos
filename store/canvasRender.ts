@@ -15,6 +15,8 @@ export const useCanvasRender = defineStore(
     function handleMouseWheel(e: WheelEvent) {
       if (!window.$KeyboardActive.space)
         return
+      // 阻止默认事件
+      e.preventDefault()
       if (e.deltaY > 0)
         scale.value -= 0.05
       else
