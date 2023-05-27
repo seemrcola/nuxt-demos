@@ -6,11 +6,12 @@ const props = defineProps<{
 
 <template>
   <div>
+    <!-- Basic -->
     <BasicButton v-if="props.component === 'BasicButton'" />
     <BasicCard v-if="props.component === 'BasicCard'" />
     <BasicText v-if="props.component === 'BasicText'" />
     <BasicImage v-if="props.component === 'BasicImage'" />
-
+    <!-- Shape -->
     <ShapeStar v-if="props.component === 'ShapeStar'" />
     <ShapeLine v-if="props.component === 'ShapeLine'" />
     <ShapeBubble v-if="props.component === 'ShapeBubble'" />
