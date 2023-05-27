@@ -5,6 +5,12 @@ import CompsList from './components/CompsList.vue'
 import Settings from './components/Settings.vue'
 import CanvasContainer from './components/Container.vue'
 import Ruler from './components/Ruler.vue'
+import Layer from './components/Layer.vue'
+
+const mode = ref('components')
+function changeMode(name: string) {
+  mode.value = name
+}
 </script>
 
 <template>
@@ -14,8 +20,9 @@ import Ruler from './components/Ruler.vue'
     </template>
     <template #sidebar>
       <div flex h-full>
-        <Aside w="36px" bg-white />
-        <CompsList flex-1 bg-white />
+        <Aside w="36px" bg-white @checkout="changeMode" />
+        <CompsList v-if="mode === 'components'" flex-1 bg-white />
+        <Layer v-if="mode === 'layers'" flex-1 bg-white />
       </div>
     </template>
     <template #content>
