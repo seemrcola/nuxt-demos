@@ -2,12 +2,14 @@
 import NGoast from './NGoast.vue'
 import { BasicDescribes } from '~/components/Basic/index.describe'
 import { ShapeDescribes } from '~/components/Shape/index.describe'
+import { ToysDescribes } from '~/components/Toys/index.describe'
 import { useCanvasRender } from '~/store/canvasRender'
 
 const canvasRender = useCanvasRender()
 
 const basicComponents = BasicDescribes
 const basicShapes = ShapeDescribes
+const basicToys = ToysDescribes
 
 let dragFlag = false
 let mousedownSnapshotName = ''
@@ -56,7 +58,7 @@ function mouseupHandler(e: MouseEvent) {
   document.removeEventListener('mouseup', mouseupHandler)
 }
 function findDiscribe(name: string) {
-  return [...BasicDescribes, ...ShapeDescribes].find((describe) => {
+  return [...BasicDescribes, ...ShapeDescribes, ...ToysDescribes].find((describe) => {
     return describe.name === name
   })
 }
@@ -117,6 +119,20 @@ onUnmounted(() => {
         </div>
       </div>
     </div>
+    <div>
+      <div text-sm text-center b-b="1px gray dashed" py-2>
+        <strong> Basic Toys </strong>
+      </div>
+      <div flex flex-wrap justify-around p-2>
+        <div
+          v-for="item of basicToys" :key="item.name"
+          flex-center class="toys-item"
+          @mousedown="mousedownHandler($event, item.name)"
+        >
+          <div :class="item.icon" h-6 w-6 />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -124,6 +140,17 @@ onUnmounted(() => {
   .comp-item {
     width: 45%;
     height: 25px;
+    margin: 5px 0 5px 0;
+    border: 1px dashed gray;
+    cursor: pointer;
+    transition: all .5s;
+    &:hover {
+      color: orange
+    }
+  }
+  .toys-item {
+    width: 80px;
+    height: 80px;
     margin: 5px 0 5px 0;
     border: 1px dashed gray;
     cursor: pointer;

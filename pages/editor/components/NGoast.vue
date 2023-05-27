@@ -18,5 +18,10 @@ const props = defineProps<{
     <ShapeCircle v-if="props.component === 'ShapeCircle'" />
     <ShapeTriangle v-if="props.component === 'ShapeTriangle'" />
     <ShapeRectangle v-if="props.component === 'ShapeRectangle'" />
+    <!-- Toys -->
+    <ToysLifegame v-if="props.component === 'ToysLifegame'" />
+    <ToysMines v-if="props.component === 'ToysMines'" />
+    <ToysPlums v-if="props.component === 'ToysPlums'" />
+    <ToysVirus v-if="props.component === 'ToysVirus'" />
   </div>
 </template>
