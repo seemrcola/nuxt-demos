@@ -1,31 +1,24 @@
 <script setup lang='ts'>
 // 使用canvas画一个矩形:
-const canvasRef = ref<HTMLCanvasElement | null>(null)
-const canvasWidth = 100
-const canvasHeight = 100
-
-const state = reactive({
-  color: 'orange',
-})
-
-function draw(ctx: CanvasRenderingContext2D) {
-  ctx.fillStyle = state.color
-  ctx.fillRect(0, 0, canvasWidth, canvasHeight)
+const stageSize = {
+  width: 100,
+  height: 100,
 }
-
-onMounted(() => {
-  const canvas = canvasRef.value
-  if (!canvas)
-    return
-
-  const ctx = canvas.getContext('2d')
-  if (!ctx)
-    return
-  useDpr(ctx, canvas, canvasWidth, canvasHeight)
-  draw(ctx)
-})
+const squareConfig = {
+  x: 0,
+  y: 0,
+  width: 100,
+  height: 100,
+  fill: 'orange',
+  stroke: 'black',
+  strokeWidth: 4,
+}
 </script>
 
 <template>
-  <canvas ref="canvasRef" :height="canvasHeight" :width="canvasWidth" />
+  <v-stage :config="stageSize" centered>
+    <v-layer>
+      <v-rect :config="squareConfig" />
+    </v-layer>
+  </v-stage>
 </template>

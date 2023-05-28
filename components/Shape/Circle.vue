@@ -1,40 +1,23 @@
 <script setup lang='ts'>
-// 使用canvas画一个圆:
-const canvasRef = ref<HTMLCanvasElement | null>(null)
-const canvasWidth = 100
-const canvasHeight = 100
-
-const state = reactive({
-  circleRadius: 50,
-  circleColor: 'orange',
-})
-
-function draw(ctx: CanvasRenderingContext2D) {
-  ctx.beginPath()
-  ctx.arc(
-    canvasWidth / 2,
-    canvasHeight / 2,
-    state.circleRadius,
-    0,
-    2 * Math.PI,
-  )
-  ctx.fillStyle = state.circleColor
-  ctx.fill()
+// 使用konva画一个圆:
+const configKonva = {
+  width: 100,
+  height: 100,
 }
-
-onMounted(() => {
-  const canvas = canvasRef.value
-  if (!canvas)
-    return
-
-  const ctx = canvas.getContext('2d')
-  if (!ctx)
-    return
-  useDpr(ctx, canvas, canvasWidth, canvasHeight)
-  draw(ctx)
-})
+const configCircle = {
+  x: 50,
+  y: 50,
+  radius: 48, // 半径
+  fill: 'orange',
+  stroke: 'black',
+  strokeWidth: 2,
+}
 </script>
 
 <template>
-  <canvas ref="canvasRef" :height="canvasHeight" :width="canvasWidth" />
+  <v-stage :config="configKonva">
+    <v-layer>
+      <v-circle :config="configCircle" />
+    </v-layer>
+  </v-stage>
 </template>

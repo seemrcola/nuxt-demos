@@ -1,3 +1,5 @@
+/* 使用konva之后这个就没必要了 */
+
 export function useDpr(
   ctx: CanvasRenderingContext2D,
   canvasRef: HTMLCanvasElement,
