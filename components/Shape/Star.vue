@@ -8,7 +8,7 @@ const starConfig = {
   y: 50,
   numPoints: 5,
   innerRadius: 20,
-  outerRadius: 40,
+  outerRadius: 50,
   fill: 'red',
   stroke: 'black',
   strokeWidth: 2,
@@ -16,7 +16,7 @@ const starConfig = {
 </script>
 
 <template>
-  <v-stage :config="stageSize" centered>
+  <v-stage :config="stageSize">
     <v-layer>
       <v-star :config="starConfig" />
     </v-layer>

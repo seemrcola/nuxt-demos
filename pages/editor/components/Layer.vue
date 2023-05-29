@@ -8,17 +8,14 @@ const dragIndex = ref(-1)
 const dragOverIndex = ref(-1)
 function dragHandler(index: number, e: DragEvent) {
   e.preventDefault()
-  e.stopPropagation()
   dragIndex.value = index
 }
 function dragoverHandler(index: number, e: DragEvent) {
   e.preventDefault()
-  e.stopPropagation()
   dragOverIndex.value = index
 }
 function dragendHandler(index: number, e: DragEvent) {
   e.preventDefault()
-  e.stopPropagation()
   // 交换位置
   const dragItem = canvasRender.components[dragIndex.value]
   const dragOverItem = canvasRender.components[dragOverIndex.value]

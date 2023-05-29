@@ -90,14 +90,18 @@ onUnmounted(() => {
       :style="canvasRender.canvasStyle"
       @mousedown="mousedownHandler"
     >
-      <!-- {{ canvasRender.components }} -->
-      <NGoast
+      <Moveable
         v-for="(component, index) of canvasRender.components"
         :key="index"
-        :component="component.name"
-        absolute
+        absolute bc p-10 bg-red-400
         :style="canvasRender.componentStyle(component)"
-      />
+      >
+        <!-- {{ canvasRender.components }} -->
+        <NGoast
+          wh-full
+          :component="component.name"
+        />
+      </Moveable>
     </div>
   </div>
 </template>

@@ -14,6 +14,7 @@ export default defineConfig({
     [/^fs-(\d+)$/, ([,d]) => `font-size: ${+d / 4}rem`], /* font-size */
     [/^fw-(\d)$/, ([,d]) => `font-weight: ${+d * 100}`], /* font-weight */
     ['b', { border: '1px solid #ccc' }], /* border base */
+    ['bc', { 'box-sizing': 'content-box' }],
   ],
   shortcuts: [
     ['wh-full', 'w-full h-full'],

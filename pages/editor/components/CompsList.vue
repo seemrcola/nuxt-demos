@@ -44,6 +44,7 @@ function mouseupHandler(e: MouseEvent) {
     return
   const { clientX, clientY } = e
   const position = calcPosition({ x: clientX, y: clientY })
+  // 合并组件描述和位置信息
   canvasRender.addComponent({
     ...currentDescribe,
     ...position,
