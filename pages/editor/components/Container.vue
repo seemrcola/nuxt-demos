@@ -1,5 +1,6 @@
 <script setup lang='ts'>
 import NGoast from './NGoast.vue'
+import Moveable from './Moveable/index.vue'
 import { useCanvasRender } from '~/store/canvasRender'
 
 const canvasRender = useCanvasRender()
@@ -93,12 +94,12 @@ onUnmounted(() => {
       <Moveable
         v-for="(component, index) of canvasRender.components"
         :key="index"
-        absolute bc p-10 bg-red-400
+        absolute
         :style="canvasRender.componentStyle(component)"
+        :info="{ index, component }"
       >
         <!-- {{ canvasRender.components }} -->
         <NGoast
-          wh-full
           :component="component.name"
         />
       </Moveable>

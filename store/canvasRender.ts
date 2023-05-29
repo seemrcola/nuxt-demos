@@ -9,7 +9,6 @@ export const useCanvasRender = defineStore(
 
     function addComponent(component: any) {
       components.value.push(component)
-      console.log(components.value, 'opopop')
     }
 
     // 滚轮缩放
