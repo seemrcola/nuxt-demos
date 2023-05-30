@@ -17,6 +17,7 @@
     "@iconify/json": "^2.2.62",
     "@pinia/nuxt": "^0.4.10",
     "@types/prismjs": "^1.26.0",
+    "@types/uuid": "^9.0.1",
     "konva": "^9.0.2",
     "nuxt-app": "link:",
     "pinia": "^2.0.36",

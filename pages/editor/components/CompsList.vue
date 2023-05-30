@@ -90,8 +90,8 @@ onUnmounted(() => {
       <NGoast
         v-if="currentComponent"
         :component="currentComponent"
-        absolute z-100
         :style="style"
+        absolute z-100
       />
     </Teleport>
     <div>

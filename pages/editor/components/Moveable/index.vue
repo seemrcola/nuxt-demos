@@ -19,7 +19,8 @@ document.addEventListener('click', () => {
 })
 
 // 方位
-const orientation = ref(['lt', 'rt', 'rb', 'lb', 't', 'r', 'b', 'l'])
+type Orientation = 'lt' | 'rt' | 'rb' | 'lb' | 't' | 'r' | 'b' | 'l'
+const orientation: Orientation[] = ['lt', 'rt', 'rb', 'lb', 't', 'r', 'b', 'l']
 
 // 拖动--------------------------------------------------------------
 const moveLock = ref(false)
@@ -56,6 +57,57 @@ function mouseupHandler(e: MouseEvent) {
   document.removeEventListener('mouseup', mouseupHandler)
 }
 // ----------------------------------------------------------------
+
+// 缩放------------------------------------------------------------
+const scaleLock = ref(false)
+const startScale = { x: 0, y: 0 }
+const deltaScale = { x: 0, y: 0 }
+let scaleItem = ''
+function mousedownScaleHandler(e: MouseEvent, item: string) {
+  scaleLock.value = true
+  const { clientX, clientY } = e
+  startScale.x = clientX
+  startScale.y = clientY
+  scaleItem = item
+  document.addEventListener('mousemove', mousemoveScaleHandler)
+  document.addEventListener('mouseup', mouseupScaleHandler)
+}
+function mousemoveScaleHandler(e: MouseEvent) {
+  if (!scaleLock.value)
+    return
+  const { clientX, clientY } = e
+  deltaScale.x = clientX - startScale.x
+  deltaScale.y = clientY - startScale.y
+
+  const index = props.info.index
+  // 拖拽不同的点的时候，我们要改变的component的属性不同
+  // 当拖拽含有l的点的时候，我们要改变的是left和width
+  // 当拖拽含有t的点的时候，我们要改变的是top和height
+  // 当拖拽含有r的点的时候，我们要改变的是width
+  // 当拖拽含有b的点的时候，我们要改变的是height
+  if (scaleItem.includes('l')) {
+    canvasRender.components[index].left += deltaScale.x / scale
+    canvasRender.components[index].w -= deltaScale.x / scale
+  }
+  if (scaleItem.includes('t')) {
+    canvasRender.components[index].top += deltaScale.y / scale
+    canvasRender.components[index].h -= deltaScale.y / scale
+  }
+  if (scaleItem.includes('r'))
+    canvasRender.components[index].w += deltaScale.x / scale
+
+  if (scaleItem.includes('b'))
+    canvasRender.components[index].h += deltaScale.y / scale
+
+  startScale.x = clientX
+  startScale.y = clientY
+}
+function mouseupScaleHandler(e: MouseEvent) {
+  scaleLock.value = false
+  document.removeEventListener('mousemove', mousemoveScaleHandler)
+  document.removeEventListener('mouseup', mouseupScaleHandler)
+}
+// ----------------------------------------------------------------
 </script>
 
 <template>
@@ -72,7 +124,9 @@ function mouseupHandler(e: MouseEvent) {
         w="10px" h="10px" rounded-1 bg-blue-400
         absolute
         :class="item"
+        class="bigger"
         hover:cursor-move
+        @mousedown.stop="($event) => mousedownScaleHandler($event, item)"
       />
     </template>
   </div>
@@ -132,5 +186,16 @@ function mouseupHandler(e: MouseEvent) {
   bottom: 0;
   left: 0;
   transform: translateX(-50%) translateY(50%);
+}
+.bogger {
+  &::after {
+    content: ' ';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background-color: rgba($color: red, $alpha: 0.2);
+  }
 }
 </style>
