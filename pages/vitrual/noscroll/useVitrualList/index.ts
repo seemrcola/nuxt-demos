@@ -10,7 +10,7 @@ interface Options {
 
 export function useVitrualList(list: any[], selector: string, options: Options) {
   // 滚动相关变量>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  const { itemHeight, containerHeight, throttleTime = 0 } = options
+  const { itemHeight, containerHeight, throttleTime = 16 } = options
   let vitrualOffset = 0 // 滚动高度
   const renderOffset = ref(0) // 渲染偏移量
   const renderList = ref<any[]>([]) // 渲染列表
