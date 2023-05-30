@@ -31,14 +31,12 @@ function mousemoveHandler(e: MouseEvent) {
   const { clientX, clientY } = e
   if (!currentDescribe)
     currentDescribe = findDiscribe(mousedownSnapshotName)
-  requestAnimationFrame(() => {
-    style.value = {
-      ...style.value,
-      transform: `scale(${canvasRender.scale})`,
-      left: `${clientX - currentDescribe!.w / 2}px`,
-      top: `${clientY - currentDescribe!.h / 2}px`,
-    }
-  })
+  style.value = {
+    ...style.value,
+    transform: `scale(${canvasRender.scale})`,
+    left: `${clientX - currentDescribe!.w / 2}px`,
+    top: `${clientY - currentDescribe!.h / 2}px`,
+  }
 }
 function mouseupHandler(e: MouseEvent) {
   if (!dragFlag)
@@ -49,7 +47,9 @@ function mouseupHandler(e: MouseEvent) {
   canvasRender.addComponent({
     ...currentDescribe,
     ...position,
-    id: `id_${uuidv4().substr(0, 8)}`,
+    id: `id_${uuidv4().substring(0, 8)}`,
+    scaleX: 1, // 再合并scaleX
+    scaleY: 1, // 再合并scaleY
   })
 
   dragFlag = false

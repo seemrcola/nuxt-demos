@@ -85,6 +85,8 @@ function mousemoveScaleHandler(e: MouseEvent) {
   // 当拖拽含有t的点的时候，我们要改变的是top和height
   // 当拖拽含有r的点的时候，我们要改变的是width
   // 当拖拽含有b的点的时候，我们要改变的是height
+
+  // 我们通过更改scaleX和scaleY来实现缩放
   if (scaleItem.includes('l')) {
     canvasRender.components[index].left += deltaScale.x / scale
     canvasRender.components[index].w -= deltaScale.x / scale
@@ -187,7 +189,7 @@ function mouseupScaleHandler(e: MouseEvent) {
   left: 0;
   transform: translateX(-50%) translateY(50%);
 }
-.bogger {
+.bigger {
   &::after {
     content: ' ';
     position: absolute;
@@ -195,7 +197,6 @@ function mouseupScaleHandler(e: MouseEvent) {
     left: -10px;
     right: -10px;
     bottom: -10px;
-    background-color: rgba($color: red, $alpha: 0.2);
   }
 }
 </style>

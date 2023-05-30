@@ -33,7 +33,7 @@ export const useCanvasRender = defineStore(
 
     const componentStyle = computed(() =>
       (component: any) => ({
-        transform: `scale(${component.scale}})`,
+        transform: `scale(${component.scaleX},${component.scaleY}) `,
         left: `${component.left}px`,
         top: `${component.top}px`,
         height: `${component.h}px`,
