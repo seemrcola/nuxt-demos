@@ -61,8 +61,7 @@ function mouseupHandler(e: MouseEvent) {
 <template>
   <div
     bc
-    class="moveable-wrapper"
-    :class="{ selected }"
+    :class="{ selected, 'moveable-wrapper': !selected }"
     @click="clickHanlder"
     @mousedown="mousedownHandler"
   >
@@ -88,7 +87,7 @@ function mouseupHandler(e: MouseEvent) {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba($color: blue, $alpha: 0.2);
+    background-color: rgba($color: red, $alpha: 0.2);
   }
 }
 .selected {
