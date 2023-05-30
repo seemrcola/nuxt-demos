@@ -94,7 +94,7 @@ onUnmounted(() => {
       <Moveable
         v-for="(component, index) of canvasRender.components"
         :key="index"
-        absolute
+        absolute flex-center
         :style="{
           ...canvasRender.componentStyle(component),
           'z-index': index,
