@@ -20,6 +20,7 @@ export function useKeyboard() {
         window.$KeyboardActive.meta = true
         break
       case ' ':
+        e.preventDefault()
         window.$KeyboardActive.space = true
         break
     }
