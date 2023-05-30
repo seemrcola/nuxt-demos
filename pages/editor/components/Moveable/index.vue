@@ -4,13 +4,20 @@ import { useCanvasRender } from '~/store/canvasRender'
 const props = defineProps<{
   info: { component: any; index: number }
 }>()
+
 const canvasRender = useCanvasRender()
 
 // 选中状态
 const selected = ref(false)
-function clickHanlder() {
-  selected.value = !selected.value
+function clickHanlder(e: MouseEvent) {
+  e.stopPropagation()
+  selected.value = true
 }
+// 点击任意非选中区域，取消选中状态
+document.addEventListener('click', () => {
+  selected.value = false
+})
+
 // 方位
 const orientation = ref(['lt', 'rt', 'rb', 'lb', 't', 'r', 'b', 'l'])
 
@@ -53,7 +60,7 @@ function mouseupHandler(e: MouseEvent) {
 
 <template>
   <div
-    bc p-1
+    bc
     class="moveable-wrapper"
     :class="{ selected }"
     @click="clickHanlder"
@@ -63,7 +70,7 @@ function mouseupHandler(e: MouseEvent) {
     <template v-for="(item, index) of orientation" :key="index">
       <div
         v-if="selected"
-        w-2 h-2 rounded="50%" bg-blue-400
+        w="10px" h="10px" rounded-1 bg-blue-400
         absolute
         :class="item"
         hover:cursor-move
@@ -81,7 +88,7 @@ function mouseupHandler(e: MouseEvent) {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba($color: orange, $alpha: 0.2);
+    background-color: rgba($color: blue, $alpha: 0.2);
   }
 }
 .selected {

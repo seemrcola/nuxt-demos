@@ -1,4 +1,5 @@
 <script setup lang='ts'>
+import { v4 as uuidv4 } from 'uuid'
 import NGoast from './NGoast.vue'
 import { BasicDescribes } from '~/components/Basic/index.describe'
 import { ShapeDescribes } from '~/components/Shape/index.describe'
@@ -48,6 +49,7 @@ function mouseupHandler(e: MouseEvent) {
   canvasRender.addComponent({
     ...currentDescribe,
     ...position,
+    id: `id_${uuidv4().substr(0, 8)}`,
   })
 
   dragFlag = false

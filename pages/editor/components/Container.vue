@@ -95,7 +95,10 @@ onUnmounted(() => {
         v-for="(component, index) of canvasRender.components"
         :key="index"
         absolute
-        :style="canvasRender.componentStyle(component)"
+        :style="{
+          ...canvasRender.componentStyle(component),
+          'z-index': index,
+        }"
         :info="{ index, component }"
       >
         <!-- {{ canvasRender.components }} -->
