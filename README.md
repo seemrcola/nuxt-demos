@@ -1,10 +1,11 @@
 ## Nuxt 3 Study
+这个仓库主要是跟风写一下nuxt3，顺便写点乱七八糟的demo。
 
 这里面建了几个我想学习的东西
 - 可视化拖拽     /pages/editor
 - webrtc       /pages/webrtc
 - 前端视频裁剪   /pages/clipping
-- 虚拟列表           /pages/vitrual
+- 虚拟列表      /pages/vitrual
 
 editor 目前只是一个简单的拖拽，还没有实现可视化编辑，后续会加上。当前是完成了拖拽入画布的功能。  
 `拖拽功能的缩放我没有想到好的办法，暂时搞个缩放的时候组件居中装装样子 [fixme...]`

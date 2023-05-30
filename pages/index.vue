@@ -1,75 +1,48 @@
 <script setup lang='ts'>
-import { useRouter } from 'vue-router'
-
-const demos = [
-  { title: 'Editor', desc: '一个拖拽缩放的基本实现', icon: 'i-ri:coreos-fill' },
-  { title: 'Clipper', desc: '一个视频裁剪工具', icon: 'i-ic:baseline-video-settings' },
-  { title: 'WebRTC', desc: 'webrtc的一些例子', icon: 'i-mdi:webrtc' },
-  { title: 'VitrualList', desc: '虚拟滚动的案例', icon: 'i-material-symbols:format-list-bulleted-add-rounded' },
+const haveNotBegun = [
+  { title: 'Clipper', desc: 'video clipping tool', icon: 'i-ic:baseline-video-settings' },
 ]
 
-const $router = useRouter()
-function goto(route: string) {
-  if (route === 'Editor')
-    gotoEdit()
-  if (route === 'Clipper')
-    gotoClipping()
-  if (route === 'WebRTC')
-    gotoRTC()
-  if (route === 'VitrualList')
-    gotoVitrual()
-}
+const finish = [
+  { title: 'nothing', desc: 'nothing', icon: 'i-game-icons:nothing-to-say' },
+]
 
-function gotoEdit() {
-  $router.push('/editor')
-}
-function gotoClipping() {
-  $router.push('/clipping')
-}
-function gotoRTC() {
-  $router.push('/webrtc')
-}
-function gotoVitrual() {
-  $router.push('./vitrual')
+const building = [
+  { title: 'Editor', desc: 'simple drag demo', icon: 'i-ri:coreos-fill' },
+  { title: 'WebRTC', desc: 'webrtc demos', icon: 'i-mdi:webrtc' },
+  { title: 'VitrualList', desc: 'vitrual-list two plans ', icon: 'i-material-symbols:format-list-bulleted-add-rounded' },
+]
+
+const router = useRouter()
+
+function goto(route: string) {
+  router.push({ path: route.toLocaleLowerCase() })
 }
 </script>
 
 <template>
   <div
-    h="100vh" w="100vw" py-10
+    h="100vh" w="100vw" max-h="100vh" overflow-auto
+    py-10
     flex flex-wrap justify-around
   >
-    <div
-      v-for="demo in demos"
-      :key="demo.title"
-      class="card"
-      flex-center
-      w="300px"
-      rounded-3 text-sm
-      @click="goto(demo.title)"
-    >
-      <div
-        text-orange
-        h-8 w-8 mx-4
-        :class="demo.icon"
-      />
-      <div>
-        <h3>{{ demo.title }}</h3>
-        <div text-gray-500>
-          {{ demo.desc }}
-        </div>
-      </div>
+    <div w-full px-10 hover:bg-gray-200 transition duration-400>
+      <p font-700 text-center>
+        Have Not Begun
+      </p>
+      <NProject :list="haveNotBegun" @goto="goto" />
+    </div>
+    <div w-full px-10 hover:bg-orange-200 transition duration-400>
+      <p font-700 text-center>
+        Building
+      </p>
+      <NProject :list="building" @goto="goto" />
+    </div>
+    <div w-full px-10 hover:bg-red-200 transition duration-400>
+      <p font-700 text-center>
+        Finish
+      </p>
+      <NProject :list="finish" @goto="goto" />
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.card {
-  padding: 0.6rem 1rem;
-  transition: all .3s;
-  &:hover {
-    transform: scale(1.05);
-    background-color: beige;
-  }
-}
-</style>
