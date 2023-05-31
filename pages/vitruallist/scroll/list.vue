@@ -44,7 +44,7 @@ init()
           flex flex-col
           b="1px dashed gray"
         >
-          <div flex-center flex-1 @click="cc">
+          <div flex-center flex-1>
             <p text-sm>
               我是一段文本内容{{ item.text }}
             </p>

@@ -3,6 +3,7 @@ import List from './noscroll/list.vue'
 import ListSimple from './noscroll/list-simple.vue'
 import ListScrollSimple from './scroll/list-simple.vue'
 import ListScroll from './scroll/list.vue'
+import ListScrollDynamic from './scroll/list-dynamic.vue'
 
 const status = ref('scroll')
 function change(type: string) {
@@ -38,6 +39,8 @@ function change(type: string) {
           <ListScroll />
           <div w-10 />
           <ListScrollSimple />
+          <div w-10 />
+          <ListScrollDynamic />
         </div>
       </ClientOnly>
     </div>

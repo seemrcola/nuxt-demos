@@ -34,9 +34,7 @@ init()
         v-for="(item) of renderList" :key="item.text"
         bg="white"
         h="40px"
-        :style="{
-          ...itemStyle,
-        }"
+        :style="itemStyle"
       >
         <div h-full flex-center b="1px dashed gray">
           #Title {{ item.text }}
