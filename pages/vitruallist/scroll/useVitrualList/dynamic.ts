@@ -63,7 +63,10 @@ export function calcStartEnd(
 ) {
   const start = bs(dynamicListDesc.value, vitrualOffset)
   let end = start + 1
-  while (dynamicListDesc.value[end].bottom < (vitrualOffset + containerHeight))
+  while (
+    end < dynamicListDesc.value.length
+     && dynamicListDesc.value[end].bottom < (vitrualOffset + containerHeight)
+  )
     end++
-  return [start, end + 1]
+  return [start, end]
 }

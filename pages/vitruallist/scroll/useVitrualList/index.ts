@@ -8,7 +8,7 @@ interface Options {
 }
 
 export function useVitrualList(list: any[], selector: string, options: Options) {
-  let { itemHeight, containerHeight, buffer = 0, dynamic = false } = options
+  let { itemHeight, containerHeight, buffer = 5, dynamic = false } = options
   const HEIGHT_SUM = list.length * itemHeight // 总高度
   const RENDER_COUNT = Math.ceil(containerHeight / itemHeight) // 渲染数量
 
