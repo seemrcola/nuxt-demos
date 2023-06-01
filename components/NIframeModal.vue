@@ -1,4 +1,5 @@
 <script setup lang='ts'>
+// 专门处理一下iframe，其他的model情况再做其他处理
 const props = defineProps<{
   visible: boolean
   src: string
