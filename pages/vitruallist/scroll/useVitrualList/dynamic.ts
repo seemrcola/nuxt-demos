@@ -29,7 +29,7 @@ export function updateDesc(
     // 计算高度差 , 真实高度减去默认高度
     const diff = realHeight - desc.height
     // 如果高度差不为0，需要更新后续所有项的top和bottom
-    if (Math.abs(diff) < 3) { // 误差3以内不予理会
+    if (diff !== 0) { // 误差0.1以内不予理会
       desc.height = realHeight
       desc.bottom = desc.bottom + diff
       for (let j = +index + 1; j < dynamicListDesc.value.length; j++) {

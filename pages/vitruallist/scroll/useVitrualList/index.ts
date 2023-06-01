@@ -52,7 +52,7 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
 
     if (dynamic) {
       const [start, end] = calcStartEnd(dynamicListDesc, top, containerHeight)
-      renderDynamic(start, end)
+      renderDynamic(start, end + 1)
     }
     else {
       const start = Math.floor(top / itemHeight)
@@ -78,7 +78,9 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
   // 处理偏移
   const itemStyle = computed(() => {
     return `
-      transform: translateY(${translateY.value}px)
+      transform: translateY(${translateY.value}px);
+      box-sizing: border-box;
+      border-bottom: none; 
     `
   })
 

@@ -3,7 +3,7 @@ import { useVitrualList } from './useVitrualList'
 
 function generateRandomText() {
   let text = ''
-  const length = Math.floor(Math.random() * 200) + 1 // 随机生成长度为1到10的整数
+  const length = Math.floor(Math.random() * 400) + 1 // 随机生成长度为1到10的整数
   const possibleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   for (let i = 0; i < length; i++) {
     const randomIndex = Math.floor(Math.random() * possibleChars.length)
@@ -14,7 +14,7 @@ function generateRandomText() {
 }
 
 // ================ 10000 items ===============
-const length = 10000
+const length = 1000
 const list: any[] = []
 for (let i = 0; i < length; i++)
   list.push({ text: i, content: generateRandomText() })
