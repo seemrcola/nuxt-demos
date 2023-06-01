@@ -20,15 +20,15 @@ function routerPush(title: string) {
       px-5 m-10
       flex items-center
       transition duration-400
-      hover=" bg-gray-100"
+      hover:bg-orange-300
+      cursor-pointer
+
       @click="routerPush(item.title)"
     >
       <div
         :class="item.icon" h="40px" w="40px"
         flex-center mr-8
-        hover="color-orange"
         transition duration-400
-        cursor-pointer
       />
       <div flex-1>
         <div font-700>
