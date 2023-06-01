@@ -37,8 +37,9 @@ export function updateDesc(
         dynamicListDesc.value[j].bottom += diff
       }
       // 更改filledEl高度
-      // const { height: filledHeight } = filledEl.getBoundingClientRect()
-      // filledEl.style.height = `${filledHeight + diff}px`
+      // const filledEL = document.querySelector('.--vitrual-list-filled--') as HTMLElement
+      // const { height: filledHeight } = filledEL.getBoundingClientRect()
+      // filledEL.style.height = `${filledHeight + diff}px`
     }
   }
 }
