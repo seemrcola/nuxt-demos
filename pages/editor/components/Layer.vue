@@ -29,7 +29,7 @@ function dragendHandler(index: number, e: DragEvent) {
 
 <template>
   <div wh-full>
-    <div h="36px" font-700 flex-center b-b="1px dashed gray">
+    <div h="36px" font-700 flex-center b-b="1px dashed gray" mb-2>
       Layers
     </div>
     <div max-h="600px" overflow-auto b-b="1px dashed gray">

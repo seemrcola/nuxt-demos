@@ -16,11 +16,11 @@ function checkout(name: string) {
     <Ntag :text="CheckoutTypes.COMPONENTS" @click="checkout(CheckoutTypes.COMPONENTS)">
       <div my-2 h-6 w-6 i-ep:element-plus />
     </Ntag>
-    <Ntag :text="CheckoutTypes.LINKS" @click="checkout(CheckoutTypes.LINKS)">
-      <div my-2 h-5 w-5 i-simple-icons:bun />
-    </Ntag>
     <Ntag :text="CheckoutTypes.LAYERS" @click="checkout(CheckoutTypes.LAYERS)">
       <div my-2 h-5 w-5 i-simple-icons:deno />
+    </Ntag>
+    <Ntag :text="CheckoutTypes.LINKS" @click="checkout(CheckoutTypes.LINKS)">
+      <div my-2 h-5 w-5 i-simple-icons:bun />
     </Ntag>
   </div>
 </template>

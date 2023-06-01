@@ -1,7 +1,5 @@
 <!-- 实现一个tooltip vue组件 -->
 <script setup lang="ts">
-import { defineProps } from 'vue'
-
 const props = defineProps<{
   text: any
 }>()
@@ -46,7 +44,7 @@ function hideTooltip() {
   </div>
 </template>
 
-<style>
+<style scoped>
 .tooltip {
   opacity: 0.9; /* 初始透明度为0.9 */
   animation: fade 1s ease-in-out; /* 定义动画属性 */

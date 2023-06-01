@@ -6,6 +6,7 @@ import Settings from './components/Settings.vue'
 import CanvasContainer from './components/Container.vue'
 import Ruler from './components/Ruler.vue'
 import Layer from './components/Layer.vue'
+import Links from './components/Links.vue'
 
 const mode = ref('components')
 function changeMode(name: string) {
@@ -23,6 +24,7 @@ function changeMode(name: string) {
         <Aside w="36px" bg-white @checkout="changeMode" />
         <CompsList v-if="mode === 'components'" flex-1 bg-white />
         <Layer v-if="mode === 'layers'" flex-1 bg-white />
+        <Links v-if="mode === 'links'" flex-1 bg-white />
       </div>
     </template>
     <template #content>

@@ -16,7 +16,7 @@ const building = [
 const router = useRouter()
 
 function goto(route: string) {
-  router.push({ path: route.toLocaleLowerCase() })
+  router.push({ name: route.toLocaleLowerCase() })
 }
 </script>
 
