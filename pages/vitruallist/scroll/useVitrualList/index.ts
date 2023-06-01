@@ -45,14 +45,13 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
   }
 
   function handlerScroll(e: Event) {
-    // console.log('scroll')
     const top = (e.target as HTMLElement).scrollTop
     if (top < 0 || top > HEIGHT_SUM)
       return
 
     if (dynamic) {
       const [start, end] = calcStartEnd(dynamicListDesc, top, containerHeight)
-      renderDynamic(start, end + 1)
+      renderDynamic(start, end + 1) // 因为slice是左闭右开的，所以这里做个+1
     }
     else {
       const start = Math.floor(top / itemHeight)
