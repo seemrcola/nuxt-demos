@@ -1,11 +1,15 @@
 <script lang="ts" setup>
 const props = defineProps<{
   visible: boolean
+  width: string | number
 }>()
 
 const emit = defineEmits<{
   (e: 'update:visible', value: boolean): void
 }>()
+
+const width = props.width || 500
+const widthStyle = `width: ${width}px`
 
 function close() {
   emit('update:visible', false)
@@ -24,7 +28,8 @@ function close() {
       class="slide-in"
       absolute top-0 bottom-0 right-0 z-9999
       bg="white"
-      w="80%" max-w="500px"
+      w="80%"
+      :style="widthStyle"
     >
       <slot />
     </div>
