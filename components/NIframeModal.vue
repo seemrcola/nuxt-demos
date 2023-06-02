@@ -28,7 +28,7 @@ function iframeLoad() {
     />
     <div
       class="fade-in-out"
-      w="80vw" h="80vh" bg-orange-300
+      w="80vw" h="80vh" bg-white
       absolute left="50%" top="50%" rounded-6
       transform translate-x="-50%" translate-y="-50%"
       z-999

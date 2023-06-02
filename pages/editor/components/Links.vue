@@ -4,6 +4,7 @@ const iframeSrc = ref('')
 
 const list = [
   { url: 'https://icones.js.org/', icon: 'i-tabler:icons', desc: 'icones' },
+  { url: 'https://unocss.dev/play', icon: 'i-logos:unocss', desc: 'unocss' },
 ]
 
 function openIframe(link: string, blank?: '_blank') {
