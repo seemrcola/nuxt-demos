@@ -1,5 +1,4 @@
 <script setup lang='ts'>
-// 专门处理一下iframe，其他的model情况再做其他处理
 const props = defineProps<{
   visible: boolean
   src: string
@@ -7,8 +6,14 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'update:visible', value: boolean): void
 }>()
+
 function close() {
   emit('update:visible', false)
+}
+
+const iframeRef = ref<HTMLIFrameElement | null>(null)
+function iframeLoad() {
+  console.log('iframeLoad', iframeRef)
 }
 </script>
 
@@ -29,7 +34,12 @@ function close() {
       z-999
       bc p-8
     >
-      <iframe :src="props.src" w-full h-full frameborder="0" />
+      <iframe
+        ref="iframeRef"
+        :src="props.src"
+        w-full h-full frameborder="0"
+        @load="iframeLoad"
+      />
     </div>
   </Teleport>
 </template>
