@@ -20,6 +20,10 @@ html.dark {
   color: white;
 }
 
+body {
+  position: relative;
+}
+
 * {
   box-sizing: border-box;
 }

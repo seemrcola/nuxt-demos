@@ -2,6 +2,7 @@
 const props = defineProps<{
   list: any[]
 }>()
+
 const emits = defineEmits<{
   (e: 'goto', payload: string): void
 }>()

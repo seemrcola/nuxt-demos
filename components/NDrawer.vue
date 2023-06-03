@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const props = defineProps<{
-  visible: boolean
-  width: string | number
+  visible: boolean // 是否显示
+  width: string | number // 宽度
 }>()
 
 const emit = defineEmits<{

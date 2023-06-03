@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 const props = defineProps<{
-  visible: boolean
-  src: string
+  visible: boolean // 是否显示
+  src: string // iframe的src
 }>()
 const emit = defineEmits<{
   (e: 'update:visible', value: boolean): void

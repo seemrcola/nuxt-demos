@@ -2,9 +2,10 @@
 <script setup lang="ts">
 type Orientation = 'top' | 'right' | 'bottom' | 'left'
 const props = defineProps<{
-  text: any
-  position?: Orientation
+  text: any // 提示文本
+  position?: Orientation // 位置
 }>()
+
 const hoverTarget = ref<HTMLElement | null>(null)
 const tooltipTarget = ref<HTMLElement | null>(null)
 
