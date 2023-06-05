@@ -1,9 +1,10 @@
 <script setup lang='ts'>
-import type { Props } from './type'
+import type { Config } from './type'
 
-const config = withDefaults(defineProps<Props>(), {
+const config = withDefaults(defineProps<Config>(), {
   content: 'default content',
 })
+
 const showMessage = ref(true)
 function onClose() {
   showMessage.value = false

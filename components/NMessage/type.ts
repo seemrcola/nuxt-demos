@@ -1,7 +1,5 @@
 import type { App } from 'vue'
 
-export type Props = Config
-
 export interface Config {
   content: string
   type?: MessageType
