@@ -15,3 +15,14 @@ export function bs(list: any[], vitrualOffset: number) {
   }
   return left + 1
 }
+
+export function generateRandomText(length: number) {
+  let text = ''
+  const possibleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * possibleChars.length)
+    text += possibleChars.charAt(randomIndex)
+  }
+
+  return text
+}

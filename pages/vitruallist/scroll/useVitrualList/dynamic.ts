@@ -4,6 +4,7 @@ export function updateDesc(
   dynamic: boolean,
   containerEl: HTMLElement,
   dynamicListDesc: Ref<any[]>,
+  filledElName: string,
 ) {
   if (!dynamic)
     return 'no need to update'
@@ -17,7 +18,7 @@ export function updateDesc(
     const index = child.dataset.index
 
     // 跳过填充项
-    if (child.className === '--vitrual-list-filled--')
+    if (child.className === filledElName)
       continue
 
     if (index === undefined)
@@ -37,11 +38,15 @@ export function updateDesc(
         dynamicListDesc.value[j].bottom += diff
       }
       // 更改filledEl高度
-      // const filledEL = document.querySelector('.--vitrual-list-filled--') as HTMLElement
-      // const { height: filledHeight } = filledEL.getBoundingClientRect()
-      // filledEL.style.height = `${filledHeight + diff}px`
+      changeFilledElHeight(diff, filledElName)
     }
   }
+}
+
+function changeFilledElHeight(diff: number, filledElName: string) {
+  const filledEL = document.querySelector(`.${filledElName}`) as HTMLElement
+  const { height: filledHeight } = filledEL.getBoundingClientRect()
+  filledEL.style.height = `${filledHeight + diff}px`
 }
 
 // 初始化所有列表项--动态高度

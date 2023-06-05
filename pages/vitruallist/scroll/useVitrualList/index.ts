@@ -1,4 +1,5 @@
 import { calcStartEnd, initAllListDesc, updateDesc } from './dynamic'
+import { generateRandomText } from './utils'
 
 interface Options {
   itemHeight: number // 单个元素高度
@@ -32,9 +33,11 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     container.addEventListener('scroll', handlerScroll)
   }
 
+  const filledElName = `--vitrual-list-filled--${generateRandomText(5)}`
+
   function generaterFilled() {
     const filled = document.createElement('div')
-    filled.className = '--vitrual-list-filled--'
+    filled.className = filledElName
     filled.style.height = `${HEIGHT_SUM}px`
     filled.style.width = '100%'
     filled.style.position = 'absolute'
@@ -46,7 +49,10 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
 
   function handlerScroll(e: Event) {
     const top = (e.target as HTMLElement).scrollTop
-    if (top < 0 || top > HEIGHT_SUM)
+    if (top < 0)
+      return
+    // 如果高度确定了，那我们也判断一下超出高度的情况
+    if (!dynamic && top > HEIGHT_SUM)
       return
 
     if (dynamic) {
@@ -89,6 +95,7 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
       dynamic,
       container,
       dynamicListDesc,
+      filledElName,
     )
   })
 
