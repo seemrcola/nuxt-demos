@@ -1,7 +1,9 @@
 <script setup lang='ts'>
 import type { Config } from './type'
 
-const config = withDefaults(defineProps<Config>(), {
+type Props = Config
+
+const props = withDefaults(defineProps<Props>(), {
   content: 'default content',
 })
 
@@ -25,25 +27,25 @@ function onClose() {
     transition duration-400
   >
     <!-- 消息类型图标，通过消息类型确定，text类型不配置图标 -->
-    <div v-if="config.icon">
+    <div v-if="props.icon">
       <div
         :class="{
-          [config.icon]: true,
-          'text-green-6': config.type === 'success',
-          'text-red-6': config.type === 'error',
-          'text-yellow-6': config.type === 'warning',
-          'text-blue-6': config.type === 'info',
+          [props.icon]: true,
+          'text-green-6': props.type === 'success',
+          'text-red-6': props.type === 'error',
+          'text-yellow-6': props.type === 'warning',
+          'text-blue-6': props.type === 'info',
         }"
         h="20px" w="20px"
       />
     </div>
 
     <!-- 消息文本 -->
-    <span v-text="config.content" />
+    <span v-text="props.content" />
 
     <!-- 手动关闭消息 -->
     <div
-      v-if="config.close"
+      v-if="props.close"
       rounded-full
       text-gray-6 cursor-pointer
       hover="bg-red-4 "
