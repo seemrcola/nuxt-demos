@@ -1,7 +1,13 @@
 <script setup lang='ts'>
-import type { Config } from './type'
+import type { MessageType } from './type'
 
-type Props = Config
+export interface Props {
+  content: string
+  type?: MessageType
+  icon?: string
+  close?: boolean
+  duration?: number
+}
 
 const props = withDefaults(defineProps<Props>(), {
   content: 'default content',
