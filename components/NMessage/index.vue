@@ -1,6 +1,7 @@
 <script setup lang='ts'>
 import type { MessageType } from './type'
 
+// netlify不兼容导入的类型，可能是它的打包环境过旧，这里我兼容一下它。
 export interface Props {
   content: string
   type?: MessageType
@@ -8,6 +9,7 @@ export interface Props {
   close?: boolean
   duration?: number
 }
+// --------------------------------------------------------
 
 const props = withDefaults(defineProps<Props>(), {
   content: 'default content',

@@ -25,7 +25,6 @@ const orientation: Orientation[] = ['lt', 'rt', 'rb', 'lb', 't', 'r', 'b', 'l']
 // 拖动--------------------------------------------------------------
 const moveLock = ref(false)
 const start = { x: 0, y: 0 }
-const { scale } = canvasRender
 
 const delta = { x: 0, y: 0 }
 function mousedownHandler(e: MouseEvent) {
@@ -45,6 +44,7 @@ function mousemoveHandler(e: MouseEvent) {
   delta.y = clientY - start.y
 
   const index = props.info.index
+  const { scale } = canvasRender
   canvasRender.components[index].left += delta.x / scale
   canvasRender.components[index].top += delta.y / scale
 
@@ -80,6 +80,7 @@ function mousemoveScaleHandler(e: MouseEvent) {
   deltaScale.y = clientY - startScale.y
 
   const index = props.info.index
+  const { scale } = canvasRender
   // 拖拽不同的点的时候，我们要改变的component的属性不同
   // 当拖拽含有l的点的时候，我们要改变的是left和width
   // 当拖拽含有t的点的时候，我们要改变的是top和height
