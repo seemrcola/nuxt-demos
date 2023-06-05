@@ -1,5 +1,5 @@
 import { calcStartEnd, initAllListDesc, updateDesc } from './dynamic'
-import { generateRandomText } from './utils'
+import { FILLED_INDEX, FILLED_NAME } from './constants'
 
 interface Options {
   itemHeight: number // 单个元素高度
@@ -19,6 +19,7 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
 
   const dynamicListDesc = ref<any[]>([])
   const dynamicList = ref<any[]>([])
+  let filledEl: HTMLElement
 
   function initContainer() {
     const container = document.querySelector(selector) as HTMLElement
@@ -33,17 +34,20 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     container.addEventListener('scroll', handlerScroll)
   }
 
-  const filledElName = `--vitrual-list-filled--${generateRandomText(5)}`
-
   function generaterFilled() {
     const filled = document.createElement('div')
-    filled.className = filledElName
+
+    filled.className = FILLED_NAME
+
     filled.style.height = `${HEIGHT_SUM}px`
     filled.style.width = '100%'
     filled.style.position = 'absolute'
     filled.style.top = '0'
     filled.style.left = '0'
     filled.style.zIndex = '-1'
+    filled.dataset.index = FILLED_INDEX
+
+    filledEl = filled
     return filled
   }
 
@@ -94,8 +98,8 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     updateDesc(
       dynamic,
       container,
+      filledEl,
       dynamicListDesc,
-      filledElName,
     )
   })
 

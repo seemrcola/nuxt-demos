@@ -1,6 +1,8 @@
+import { SCROLL_NAME, SCROLL_WRAPPER_NAME } from './constants'
+
 export function scrollbar(barHeight: number) {
   const scrollbar = document.createElement('div')
-  scrollbar.className = '--scrollbar--'
+  scrollbar.className = SCROLL_NAME
 
   const position = 'absolute'
   const right = '2px'
@@ -28,7 +30,7 @@ export function scrollbar(barHeight: number) {
 
 export function scrollWrapper(containerHeight: number) {
   const wrapper = document.createElement('div')
-  wrapper.className = '--scrollbar-wrapper--'
+  wrapper.className = SCROLL_WRAPPER_NAME
 
   const height = `${containerHeight}px`
   const width = '14px'

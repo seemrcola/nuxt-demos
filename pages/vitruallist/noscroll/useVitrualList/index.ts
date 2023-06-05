@@ -93,11 +93,9 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     renderList.value = items
   }
 
-  const renderOffsetStyle = computed(() => {
-    return {
-      transform: `translateY(${-renderOffset.value}px)`,
-    }
-  },
+  const renderOffsetStyle = computed(() => `
+      transform: translateY(${-renderOffset.value}px),
+    `,
   )
   // ======================================================滚动相关end======================================================
 
