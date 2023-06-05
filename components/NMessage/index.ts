@@ -5,28 +5,30 @@ import type { Config, MessageTipFunction, MessageType } from './type'
 const Field: MessageType[] = ['success', 'error', 'warning', 'info']
 
 // @ts-expect-error
-const messageTip: MessageTipFunction = (props: Config) => {
+const NMessage: MessageTipFunction = (props: Config) => {
   const messageInstance = createApp(MessageComponent, {
     ...props,
   })
-  showMessage(messageInstance)
+  showMessage(messageInstance, props.duration)
 }
 
 Field.forEach((type: MessageType) => {
-  messageTip[type] = (props: Config) => {
+  NMessage[type] = (props: Config) => {
     props.type = type
-    return messageTip(props)
+    return NMessage(props)
   }
 })
 
-function showMessage(app: any) {
+function showMessage(app: any, durantion = 3000) {
   const fragment = document.createDocumentFragment()
   app.mount(fragment)
   document.body.appendChild(fragment)
 
   setTimeout(() => {
     app.unmount() // 销毁实例
-  }, 3000) // 3s后销毁实例 -- 暂时写死
+  }, durantion)
 }
 
-export default messageTip
+export default NMessage
+
+// 全局挂载暂未实现-----------------------------------todo

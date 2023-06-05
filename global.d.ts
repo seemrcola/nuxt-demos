@@ -1,3 +1,5 @@
+import { MessageTipFunction } from '@/components/MessageTip'
+
 interface FnKeyboard {
   ctrl: boolean
   shift: boolean

@@ -5,12 +5,13 @@ export interface Config {
   type?: MessageType
   icon?: string
   close?: boolean
+  duration?: number
 }
 
 export type MessageType = 'success' | 'error' | 'warning' | 'info'
 
 export type MessageTipFunction = {
-  (props: Props): void
+  (props: Config): void
 } & {
-  [key in MessageType]: (props: Props) => void
+  [key in MessageType]: (props: Config) => void
 }

@@ -4,7 +4,6 @@ import NMessage from '@/components/NMessage'
 function show() {
   NMessage({
     content: 'default content',
-    type: 'warning',
     icon: 'i-gridicons:notice-outline',
     close: true,
   })

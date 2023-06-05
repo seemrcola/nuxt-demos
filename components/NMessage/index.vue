@@ -3,9 +3,6 @@ import type { Props } from './type'
 
 const config = withDefaults(defineProps<Props>(), {
   content: 'default content',
-  type: 'info',
-  icon: '',
-  close: false,
 })
 const showMessage = ref(true)
 function onClose() {
