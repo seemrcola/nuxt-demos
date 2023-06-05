@@ -1,8 +1,9 @@
 <script setup lang='ts'>
-import NMessage from '@/components/NMessage'
+import { useMessageKey } from '~/provider.keys'
 
+const useMessage = inject(useMessageKey)!
 function show() {
-  NMessage({
+  useMessage({
     content: 'default content',
     icon: 'i-gridicons:notice-outline',
     close: true,

@@ -1,34 +1,22 @@
-import { createApp } from 'vue'
-import MessageComponent from './index.vue'
-import type { Config, MessageTipFunction, MessageType } from './type'
+import type { App } from 'vue'
+import NMessage from './message'
+import type { UseMessage } from './type'
+import { useMessageKey } from '~/provider.keys'
 
-const Field: MessageType[] = ['success', 'error', 'warning', 'info']
+const useMessage: UseMessage = Object.assign(
+  NMessage,
+  {
+    install(app: App) {
+      app.config.globalProperties.useMessage = NMessage
+      app.provide(useMessageKey, NMessage)
+      // app.component('NMessage', NMessage) // 这一步nuxt有自动导入，会自行处理
+    },
+  },
+)
 
-// @ts-expect-error
-const NMessage: MessageTipFunction = (props: Config) => {
-  const messageInstance = createApp(MessageComponent, {
-    ...props,
-  })
-  showMessage(messageInstance, props.duration)
-}
+export default useMessage
 
-Field.forEach((type: MessageType) => {
-  NMessage[type] = (props: Config) => {
-    props.type = type
-    return NMessage(props)
-  }
-})
-
-function showMessage(app: any, durantion = 3000) {
-  const fragment = document.createDocumentFragment()
-  app.mount(fragment)
-  document.body.appendChild(fragment)
-
-  setTimeout(() => {
-    app.unmount() // 销毁实例
-  }, durantion)
-}
-
-export default NMessage
-
-// 全局挂载暂未实现-----------------------------------todo
+// index.vue是为了让nuxt3自动导入，通过组件方式使用
+// index.ts是为了让用户手动导入，通过函数方式使用
+// 全局挂载未实现------------------todo-----------------------
+// 现在有两种方法使用，一种是inject导入，一种是直接导入对应组件的index.ts文件
