@@ -1,6 +1,8 @@
 <script setup lang='ts'>
 const haveNotBegun = [
   { title: 'Clipper', desc: 'video clipping tool', icon: 'i-ic:baseline-video-settings' },
+  { title: 'Multi', desc: 'multi-person collaboration', icon: 'i-mdi-light:monitor-multiple' },
+  { title: 'Uploader', desc: 'uploader for myself', icon: 'i-material-symbols:drive-folder-upload' },
 ]
 
 const finish = [
