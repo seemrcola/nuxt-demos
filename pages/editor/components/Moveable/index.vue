@@ -194,10 +194,10 @@ function mouseupScaleHandler(e: MouseEvent) {
   &::after {
     content: ' ';
     position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
   }
 }
 </style>
