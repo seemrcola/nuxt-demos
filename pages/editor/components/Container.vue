@@ -91,6 +91,9 @@ onUnmounted(() => {
       :style="canvasRender.canvasStyle"
       @mousedown="mousedownHandler"
     >
+      <!-- 这里又个比较麻烦的问题： -->
+      <!-- 我把宽高设在了moveable组件上，但是所有的组件又自带一个宽高，导致拉伸缩放的时候改变的是moveable的宽高 -->
+      <!-- fixme -->
       <Moveable
         v-for="(component, index) of canvasRender.components"
         :key="index"
