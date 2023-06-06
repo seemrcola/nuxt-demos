@@ -3,5 +3,5 @@
 </script>
 
 <template>
-  <div h="1px" w="100px" bg="orange" />
+  <div h="5px" w="100px" bg="orange" />
 </template>
