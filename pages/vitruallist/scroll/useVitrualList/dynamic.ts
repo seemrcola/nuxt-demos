@@ -62,15 +62,17 @@ export function initAllListDesc(list: any[], itemHeight: number) {
   })
 }
 
-export function calcStartEnd(
+export function calcDynamicStartEnd(
   dynamicListDesc: Ref<any[]>,
   vitrualOffset: number,
   containerHeight: number,
 ) {
+  // 第一个展示的元素
   const start = bs(dynamicListDesc.value, vitrualOffset)
   let end = start + 1
+  // 找到最后一个展示的元素
   while (
-    end < dynamicListDesc.value.length
+    end < dynamicListDesc.value.length // 这个判断是处理触底的找不到bottom报错
      && dynamicListDesc.value[end].bottom < (vitrualOffset + containerHeight)
   )
     end++

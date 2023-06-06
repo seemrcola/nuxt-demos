@@ -45,7 +45,7 @@ function change(type: string) {
       </ClientOnly>
     </div>
     <footer h="50px" bg="#fafafa" flex-center text-sm>
-      <div>不定高情况下尚未实现完毕，具体实现方案可以参考这个文章</div>
+      <div>不定高情况做了初步实现 具体实现方案可以参考这个文章</div>
       <div flex-center>
         <a
           target="_blank"

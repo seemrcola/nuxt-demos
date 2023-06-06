@@ -1,21 +1,22 @@
-import { calcStartEnd, initAllListDesc, updateDesc } from './dynamic'
+import { calcDynamicStartEnd, initAllListDesc, updateDesc } from './dynamic'
 import { FILLED_INDEX, FILLED_NAME } from './constants'
 
 interface Options {
   itemHeight: number // 单个元素高度
   containerHeight: number // 容器高度
-  buffer?: number // 缓冲区
   dynamic?: boolean // 是否动态高度
 }
 
 export function useVitrualList(list: any[], selector: string, options: Options) {
-  let { itemHeight, containerHeight, buffer = 5, dynamic = false } = options
+  let { itemHeight, containerHeight, dynamic = false } = options
+  if (dynamic) // 由于用户可能会传一个过大的高度，我们这里做个限制，写死30
+    itemHeight = 30
   const HEIGHT_SUM = list.length * itemHeight // 总高度
   const RENDER_COUNT = Math.ceil(containerHeight / itemHeight) // 渲染数量
 
   const renderList = ref<any[]>([])
   const translateY = ref(0)
-  buffer = RENDER_COUNT // 缓冲区
+  const BUFFER = RENDER_COUNT > 15 ? 15 : RENDER_COUNT // 缓冲区设置个最大值
 
   const dynamicListDesc = ref<any[]>([])
   const dynamicList = ref<any[]>([])
@@ -53,33 +54,34 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
 
   function handlerScroll(e: Event) {
     const top = (e.target as HTMLElement).scrollTop
-    if (top < 0)
-      return
-    // 如果高度确定了，那我们也判断一下超出高度的情况
-    if (!dynamic && top > HEIGHT_SUM)
-      return
 
-    if (dynamic) {
-      const [start, end] = calcStartEnd(dynamicListDesc, top, containerHeight)
-      renderDynamic(start, end + 1) // 因为slice是左闭右开的，所以这里做个+1
-    }
-    else {
-      const start = Math.floor(top / itemHeight)
-      const end = start + RENDER_COUNT + 1
-      render(start, end)
-    }
+    if (dynamic)
+      scroll4Dynamic(top)
+    else
+      scroll4Static(top)
+  }
+
+  function scroll4Static(top: number) {
+    const start = Math.floor(top / itemHeight)
+    const end = start + RENDER_COUNT + 1
+    render(start, end)
+  }
+
+  function scroll4Dynamic(top: number) {
+    const [start, end] = calcDynamicStartEnd(dynamicListDesc, top, containerHeight)
+    renderDynamic(start, end + 1) // 因为slice是左闭右开的，所以这里做个+1
   }
 
   function renderDynamic(start: number, end: number) {
-    start = Math.max(start - buffer, 0)
-    end = Math.min(end + buffer, list.length)
+    start = Math.max(start - BUFFER, 0)
+    end = Math.min(end + BUFFER, list.length)
     translateY.value = dynamicListDesc.value[start].top
     dynamicList.value = dynamicListDesc.value.slice(start, end)
   }
 
   function render(start: number, end: number) {
-    start = Math.max(start - buffer, 0)
-    end = Math.min(end + buffer, list.length)
+    start = Math.max(start - BUFFER, 0)
+    end = Math.min(end + BUFFER, list.length)
     translateY.value = start * itemHeight
     renderList.value = list.slice(start, end)
   }
