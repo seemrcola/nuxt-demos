@@ -16,5 +16,8 @@ function show() {
     <button @click="show">
       click show message
     </button>
+    <div flex flex-col max-h="400px" overflow-auto>
+      <div h="5000px" />
+    </div>
   </div>
 </template>
