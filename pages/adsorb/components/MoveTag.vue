@@ -3,7 +3,7 @@ type Direction = 'top' | 'right' | 'bottom' | 'left'
 const currentDirection = ref<Direction>('top') // 当前方向
 const currentAngle = ref(0) // 当前角度
 
-const RADIUS = 300 / 2
+const RADIUS = 500 / 2
 
 const css = ref('')
 
@@ -34,9 +34,9 @@ function mousemoveHanlder(e: MouseEvent) {
     () => {
       let rotate = 0
       if (currentDirection.value === 'left')
-        rotate = 90
-      if (currentDirection.value === 'right')
         rotate = -90
+      if (currentDirection.value === 'right')
+        rotate = 90
       css.value = `
         left: ${offsetX}px; top: ${offsetY}px;
         transform: '';

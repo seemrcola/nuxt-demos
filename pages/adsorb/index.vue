@@ -9,7 +9,7 @@ import MoveTag from './components/MoveTag.vue'
       relative wh-full bg-gray-200 cursor-pointer
     >
       <div
-        bg-orange opacity-50 h="400px" w="400px" rounded-full
+        bg-orange opacity-50 h="600px" w="600px" rounded-full
         absolute left="50%" top="50%" translate-x="-50%" translate-y="-50%"
         cursor-default
       />
