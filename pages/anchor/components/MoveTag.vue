@@ -4,11 +4,15 @@ const currentDirection = ref<Direction>('top') // 当前方向
 const currentAngle = ref(0) // 当前角度
 
 const RADIUS = 500 / 2
+const HEIGHT = 28
+const WIDTH = 120
 
 const css = ref<any>({})
 
 // show----------------------------------------------------
 function moveTagByDirection(direction: Direction) {
+  const skewTransform = `translateX(${-HEIGHT / 2}px)`
+  const skewPosition = `-${(WIDTH - HEIGHT) / 2}px`
   switch (direction) {
     case 'top':
       css.value
@@ -16,7 +20,7 @@ function moveTagByDirection(direction: Direction) {
       break
     case 'right':
       css.value
-      = { right: '0', top: '50%', transform: 'translateY(-50%)', rotate: '90deg' }
+      = { right: skewPosition, top: '50%', transform: skewTransform, rotate: '90deg' }
       break
     case 'bottom':
       css.value
@@ -24,7 +28,7 @@ function moveTagByDirection(direction: Direction) {
       break
     case 'left':
       css.value
-      = { left: 0, top: '50%', transform: 'translateY(-50%)', rotate: '-90deg' }
+      = { left: skewPosition, top: '50%', transform: skewTransform, rotate: '90deg' }
       break
   }
 }
