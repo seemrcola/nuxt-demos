@@ -19,23 +19,23 @@ import MoveTag from './components/MoveTag.vue'
 </template>
 
 <style lang="scss" scoped>
-// .diagonal-div {
-//   background: linear-gradient(
-//     to top right,
-//     rgba(0, 0, 0, 0) 0%,
-//     rgba(0, 0, 0, 0) calc(50% - 1px),
-//     rgba(0, 0, 0, 1) 50%,
-//     rgba(0, 0, 0, 0) calc(50% + 1px),
-//     rgba(0, 0, 0, 0) 100%
-//   ), linear-gradient(
-//     to bottom right,
-//     rgba(0, 0, 0, 0) 0%,
-//     rgba(0, 0, 0, 0) calc(50% - 1px),
-//     rgba(0, 0, 0, 1) 50%,
-//     rgba(0, 0, 0, 0) calc(50% + 1px),
-//     rgba(0, 0, 0, 0) 100%
-//   );
-// }
+.diagonal-div {
+  background: linear-gradient(
+    to top right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) calc(50% - 1px),
+    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 0) calc(50% + 1px),
+    rgba(0, 0, 0, 0) 100%
+  ), linear-gradient(
+    to bottom right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) calc(50% - 1px),
+    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 0) calc(50% + 1px),
+    rgba(0, 0, 0, 0) 100%
+  );
+}
 .diagonal-div::before {
   content: '';
   position: absolute;

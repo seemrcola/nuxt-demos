@@ -13,7 +13,7 @@ const building = [
   { title: 'Editor', desc: 'simple drag demo', icon: 'i-ri:coreos-fill' },
   { title: 'WebRTC', desc: 'webrtc demos', icon: 'i-mdi:webrtc' },
   { title: 'VitrualList', desc: 'vitrual-list two plans ', icon: 'i-material-symbols:format-list-bulleted-add-rounded' },
-  { title: 'Adsorb', desc: 'adsorb', icon: 'i-mdi-light:adsorb' },
+  { title: 'Anchor', desc: 'watch pointer position and anchor', icon: 'i-ph:anchor-bold' },
 ]
 
 const router = useRouter()

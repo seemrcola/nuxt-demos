@@ -4,11 +4,11 @@
 import type { UseDragResult } from './types/useTeleportDrag.d'
 
 export function useTeleportDrag(domRef: Ref<any>): UseDragResult {
-  let dragFlag = false
+  const dragFlag = ref(false)
   let skewing: { x: number; y: number }
 
   function mousedownHanlder(e: MouseEvent) {
-    dragFlag = true
+    dragFlag.value = true
     const { clientX, clientY } = e
     const rect = domRef.value!.getBoundingClientRect()
     const { left: preLeft, top: preTop } = rect
@@ -32,12 +32,13 @@ export function useTeleportDrag(domRef: Ref<any>): UseDragResult {
     )
   }
   function mouseupHanlder() {
-    dragFlag = false
+    dragFlag.value = false
     document.removeEventListener('mousemove', mousemoveHanlder)
     document.removeEventListener('mouseup', mouseupHanlder)
   }
 
   return {
     mousedownHanlder,
+    dragFlag,
   }
 }
