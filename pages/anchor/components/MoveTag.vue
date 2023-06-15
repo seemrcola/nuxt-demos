@@ -4,19 +4,20 @@ const currentDirection = ref<Direction>('top') // 当前方向
 const currentAngle = ref(0) // 当前角度
 
 const RADIUS = 500 / 2
-const HEIGHT = 28
-const WIDTH = 120
+const HEIGHT = 36
+const WIDTH = 140
 
 const css = ref<any>({})
 
 // show----------------------------------------------------
 function moveTagByDirection(direction: Direction) {
+  const FIXED = 20
   const skewTransform = `translateX(${-HEIGHT / 2}px)`
-  const skewPosition = `-${(WIDTH - HEIGHT) / 2}px`
+  const skewPosition = `-${(WIDTH - HEIGHT) / 2 - FIXED}px`
   switch (direction) {
     case 'top':
       css.value
-      = { left: '50%', top: 0, transform: 'translateX(-50%)', rotate: '0deg' }
+      = { left: '50%', top: `${0 + FIXED}px`, transform: 'translateX(-50%)', rotate: '0deg' }
       break
     case 'right':
       css.value
@@ -24,7 +25,7 @@ function moveTagByDirection(direction: Direction) {
       break
     case 'bottom':
       css.value
-      = { left: '50%', bottom: 0, transform: 'translateX(-50%)', rotate: '0deg' }
+      = { left: '50%', bottom: `${0 + FIXED}px`, transform: 'translateX(-50%)', rotate: '0deg' }
       break
     case 'left':
       css.value
@@ -89,16 +90,21 @@ onUnmounted(() => {
 <template>
   <Teleport to="body">
     <div
-      h="28px" w="120px"
-      flex-center px-1
-      bg-light rounded="md" shadow="md"
+      box-border px-1
+      h="36px" w="140px" rounded="18"
+      flex-center
+      bg-light shadow="md"
       absolute z-9999
       :style="css"
       transition duration-400
     >
-      <div i-vscode-icons:file-type-nuxt />
+      <div h="28px" w="28px" flex-center bg="gray-500" rounded="50%">
+        <div h="24px" w="24px" flex-center bg-light rounded="50%">
+          <div i-logos:github-icon />
+        </div>
+      </div>
       <div flex-1 flex-center text-xs>
-        {{ currentDirection }} {{ ~~currentAngle }} <span color="orange" px-x>deg</span>
+        {{ currentDirection }} {{ ~~currentAngle }} <span color-orange>deg</span>
       </div>
     </div>
   </Teleport>
