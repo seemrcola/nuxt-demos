@@ -56,10 +56,11 @@ function hideTooltip() {
     <Teleport v-if="show" to="body">
       <div
         ref="tooltipTarget" class="tooltip"
-        absolute z-100 text-sm
+        absolute text-sm
         bg-teal-600 text="white"
         max-w="200px" py-2 px-3
         rounded="5px"
+        z-2147483647
       >
         {{ props.text }}
       </div>
