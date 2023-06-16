@@ -3,6 +3,8 @@ import type { Props } from './type'
 
 const props = withDefaults(defineProps<Props>(), {
   content: 'default content',
+  icon: 'i-gridicons:notice-outline',
+  close: true,
 })
 
 const showMessage = ref(true)
