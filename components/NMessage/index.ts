@@ -16,6 +16,8 @@ const useMessage: UseMessage = Object.assign(
 
 export default useMessage
 
+// 全局挂载未实现......
+
 // index.vue是为了让nuxt3自动导入，通过组件方式使用
 // index.ts是为了让用户手动导入，通过函数方式使用
 // 全局挂载未实现------------------todo-----------------------
