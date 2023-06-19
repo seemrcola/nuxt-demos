@@ -1,7 +1,7 @@
 /*
 * 注意：将需要drag的元素telleport到body下, 传入dom即可实现拖拽
 */
-import type { UseDragResult } from './types/useTeleportDrag.d'
+import type { UseDragResult } from '~/types/useTeleportDrag.d'
 
 export function useTeleportDrag(domRef: Ref<any>): UseDragResult {
   const dragFlag = ref(false)

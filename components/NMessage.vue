@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import type { Props } from './type'
+import type { Props } from '~/types/comp.message.d'
 
 const props = withDefaults(defineProps<Props>(), {
   content: 'default content',

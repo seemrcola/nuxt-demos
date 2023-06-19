@@ -1,5 +1,3 @@
-import type { App } from 'vue'
-
 export type Props = Config
 
 export interface Config {
@@ -16,8 +14,4 @@ export type MessageTipFunction = {
   (props: Config): void
 } & {
   [key in MessageType]: (props: Config) => void
-}
-
-export interface UseMessage extends MessageTipFunction {
-  install: (app: App) => void
 }

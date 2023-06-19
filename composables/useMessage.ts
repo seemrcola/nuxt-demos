@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
-import MessageComponent from './index.vue'
-import type { Config, MessageTipFunction, MessageType } from './type'
+import MessageComponent from '~/components/NMessage.vue'
+import type { Config, MessageTipFunction, MessageType } from '~/types/comp.message.d'
 
 const Field: MessageType[] = ['success', 'error', 'warning', 'info']
 

@@ -1,7 +1,4 @@
 <script setup lang='ts'>
-import { useMessageKey } from '~/provider.keys'
-
-const useMessage = inject(useMessageKey)!
 function show() {
   useMessage({
     content: 'default content',
