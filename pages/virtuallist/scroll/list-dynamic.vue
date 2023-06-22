@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { useVitrualList } from './useVitrualList'
+import { useVirtualList } from './useVirtualList'
 
 function generateRandomText() {
   let text = ''
@@ -20,8 +20,8 @@ for (let i = 0; i < length; i++)
   list.push({ text: i, content: generateRandomText() })
 // ===========================================
 
-// ============= useVitrualList ===============
-const vitrualList = useVitrualList(
+// ============= useVirtualList ===============
+const virtualList = useVirtualList(
   list,
   '.container-list-dynamic',
   {
@@ -30,7 +30,7 @@ const vitrualList = useVitrualList(
     dynamic: true,
   },
 )
-const { init, dynamicList, itemStyle } = vitrualList
+const { init, dynamicList, itemStyle } = virtualList
 init()
 // =========================================
 </script>

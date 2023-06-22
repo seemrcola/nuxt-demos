@@ -8,10 +8,10 @@ interface Options {
   throttleTime?: number // 节流时间
 }
 
-export function useVitrualList(list: any[], selector: string, options: Options) {
+export function useVirtualList(list: any[], selector: string, options: Options) {
   // 滚动相关变量>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   const { itemHeight, containerHeight, throttleTime = 16 } = options
-  let vitrualOffset = 0 // 滚动高度
+  let virtualOffset = 0 // 滚动高度
   const renderOffset = ref(0) // 渲染偏移量
   const renderList = ref<any[]>([]) // 渲染列表
   const RENDER_COUNT = Math.ceil(containerHeight / itemHeight) // 渲染数量
@@ -44,44 +44,44 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
   function wheelHandler(e: WheelEvent) {
     e.preventDefault()
     const { deltaY } = e
-    vitrualOffset += deltaY
+    virtualOffset += deltaY
     // 越界判断
     overflow(deltaY)
     // 计算渲染区间
-    const [start, end] = calcBlocks(vitrualOffset)
+    const [start, end] = calcBlocks(virtualOffset)
     // 渲染
     render(list.slice(start, end))
     // 滚动条位置变更=========================================
-    const top = transformVitrualToCssTop(vitrualOffset)
+    const top = transformVirtualToCssTop(virtualOffset)
     scrollbarRef.value!.style.top = `${top}px`
   }
 
   function overflow(deltaY: number) {
     // 当滚动到顶部时，不再向上滚动
-    if (deltaY < 0 && vitrualOffset <= 0) {
-      vitrualOffset = 0
+    if (deltaY < 0 && virtualOffset <= 0) {
+      virtualOffset = 0
       return true
     }
     // 当滚动到底部时，不再向下滚动
-    if (deltaY > 0 && vitrualOffset >= (list.length - RENDER_COUNT) * itemHeight) {
-      vitrualOffset = (list.length - RENDER_COUNT) * itemHeight
+    if (deltaY > 0 && virtualOffset >= (list.length - RENDER_COUNT) * itemHeight) {
+      virtualOffset = (list.length - RENDER_COUNT) * itemHeight
       return true
     }
     return false
   }
 
-  function calcBlocks(vitrualOffset: number) {
+  function calcBlocks(virtualOffset: number) {
     // 计算渲染区间
     // 需要注意的是我们执行 mid * itemHeight 的时候，mid是8，则表示前8个元素的高度总和。
-    // const start = bs(list.length, vitrualOffset, itemHeight) // start * itemHeight 必定大大于 vitrualOffset，且start不代表开始下标，而是前start个元素的高度总和个数
-    let start = Math.ceil(vitrualOffset / itemHeight)
+    // const start = bs(list.length, virtualOffset, itemHeight) // start * itemHeight 必定大大于 virtualOffset，且start不代表开始下标，而是前start个元素的高度总和个数
+    let start = Math.ceil(virtualOffset / itemHeight)
     if (start === 0)
       start = 1
     const end = start + RENDER_COUNT
 
     // 计算偏移量
     const heightSum = start * itemHeight
-    renderOffset.value = itemHeight - (heightSum - vitrualOffset)
+    renderOffset.value = itemHeight - (heightSum - virtualOffset)
 
     // 总个数处理成下标，我们要做个-1
     return [start - 1, end + 1]
@@ -149,9 +149,9 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
     scrollbarRef.value!.style.top = `${finalCssTop}px`
 
     // 滚动条移动的距离，转换成列表移动的距离，需要乘以一个比例
-    transformCssTopToVitrualOffset(finalCssTop)
+    transformCssTopToVirtualOffset(finalCssTop)
     // 根据偏移量，计算出列表的下标，然后渲染列表=========
-    const [start, end] = calcBlocks(vitrualOffset)
+    const [start, end] = calcBlocks(virtualOffset)
     render(list.slice(start, end))
   }
 
@@ -174,15 +174,15 @@ export function useVitrualList(list: any[], selector: string, options: Options) 
   // ========================================================================================================================
 
   // ===========================================公用==========================================
-  function transformCssTopToVitrualOffset(cssTop: number) {
+  function transformCssTopToVirtualOffset(cssTop: number) {
     // 滚动条的css top值，转换成列表的偏移量
-    vitrualOffset = cssTop * ratio
-    renderOffset.value = vitrualOffset
+    virtualOffset = cssTop * ratio
+    renderOffset.value = virtualOffset
   }
 
-  function transformVitrualToCssTop(vitrualOffset: number) {
+  function transformVirtualToCssTop(virtualOffset: number) {
     // 列表的偏移量，转换成滚动条的css top值
-    const cssTop = vitrualOffset / ratio
+    const cssTop = virtualOffset / ratio
     return cssTop
   }
   // ==================================================================================

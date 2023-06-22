@@ -12,7 +12,7 @@ const finish = [
 const building = [
   { title: 'Editor', desc: 'simple drag demo', icon: 'i-ri:coreos-fill' },
   { title: 'WebRTC', desc: 'webrtc demos', icon: 'i-mdi:webrtc' },
-  { title: 'VitrualList', desc: 'vitrual-list two plans ', icon: 'i-material-symbols:format-list-bulleted-add-rounded' },
+  { title: 'VirtualList', desc: 'virtual-list two plans ', icon: 'i-material-symbols:format-list-bulleted-add-rounded' },
   { title: 'Anchor', desc: 'watch pointer position and anchor', icon: 'i-ph:anchor-bold' },
 ]
 

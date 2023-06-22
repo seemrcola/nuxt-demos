@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { useVitrualList } from './useVitrualList'
+import { useVirtualList } from './useVirtualList'
 
 // ==== 10000 items ===============
 const length = 10000
@@ -8,16 +8,18 @@ for (let i = 0; i < length; i++)
   list.push({ text: i })
 // ==============================
 
-// ====== useVitrualList ==============
-const vitrualList = useVitrualList(
+// ====== useVirtualList ==============
+const virtualList = useVirtualList(
   list,
   '.container',
   {
     itemHeight: 150,
     containerHeight: 600,
+    scrollbar: true,
+    throttleTime: 16,
   },
 )
-const { init, renderList, itemStyle } = vitrualList
+const { init, renderList, renderOffsetStyle } = virtualList
 init()
 // ====================================
 </script>
@@ -32,7 +34,7 @@ init()
     >
       <div
         v-for="(item) of renderList" :key="item.text"
-        :style="itemStyle"
+        :style="renderOffsetStyle"
         bg="white"
         h="150px"
       >

@@ -3,7 +3,7 @@
 使用方式：
 ```html
 <script setup lang='ts'>
-import { useVitrualList } from './useVitrualList'
+import { useVirtualList } from './useVirtualList'
 
 // ==== 10000 items ===============
 const length = 10000
@@ -12,8 +12,8 @@ for (let i = 0; i < length; i++)
   list.push({ text: i })
 // ==============================
 
-// ====== useVitrualList ==============
-const vitrualList = useVitrualList(
+// ====== useVirtualList ==============
+const virtualList = useVirtualList(
   list,
   '.container',
   {
@@ -22,7 +22,7 @@ const vitrualList = useVitrualList(
     scrollbar: true, // 是否显示滚动条
   },
 )
-const { init, renderList, renderOffsetStyle } = vitrualList
+const { init, renderList, renderOffsetStyle } = virtualList
 // init 调用渲染列表初始化功能
 init()
 // renderList 渲染的列表
@@ -70,7 +70,7 @@ init()
 ```
 
 #### 实现思路
-1. 通过 `useVitrualList` 传入列表数据，容器选择器，配置项
+1. 通过 `useVirtualList` 传入列表数据，容器选择器，配置项
 2. 初始化时，计算出容器的高度，列表项的高度，列表项的总数，列表项的总高度
 3. 根据容器的高度，列表项的高度，列表项的总高度，计算出可视区域内的列表项的总数
 4. 根据鼠标事件的deltaY，计算出滚动的距离

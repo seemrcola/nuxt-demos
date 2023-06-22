@@ -7,7 +7,7 @@ interface Options {
   dynamic?: boolean // 是否动态高度
 }
 
-export function useVitrualList(list: any[], selector: string, options: Options) {
+export function useVirtualList(list: any[], selector: string, options: Options) {
   let { itemHeight, containerHeight, dynamic = false } = options
   if (dynamic) // 由于用户可能会传一个过大的高度，我们这里做个限制，写死30
     itemHeight = 30
