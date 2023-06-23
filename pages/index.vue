@@ -2,7 +2,7 @@
 const haveNotBegun = [
   { title: 'Clipper', desc: 'video clipping tool', icon: 'i-ic:baseline-video-settings' },
   { title: 'Multi', desc: 'multi-person collaboration', icon: 'i-mdi-light:monitor-multiple' },
-  { title: 'Uploader', desc: 'uploader for myself', icon: 'i-material-symbols:drive-folder-upload' },
+
 ]
 
 const finish = [
@@ -14,6 +14,7 @@ const building = [
   { title: 'WebRTC', desc: 'webrtc demos', icon: 'i-mdi:webrtc' },
   { title: 'VirtualList', desc: 'virtual-list two plans ', icon: 'i-material-symbols:format-list-bulleted-add-rounded' },
   { title: 'Anchor', desc: 'watch pointer position and anchor', icon: 'i-ph:anchor-bold' },
+  { title: 'lazyImage', desc: 'lazy image', icon: 'i-material-symbols:drive-folder-upload' },
 ]
 
 const router = useRouter()
